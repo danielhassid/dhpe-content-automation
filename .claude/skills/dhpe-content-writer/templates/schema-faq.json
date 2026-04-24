@@ -1,0 +1,46 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "[שאלה 1 — מילות מפתח גבוהות]",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[תשובה ישירה וקצרה — 2-3 משפטים מקסימום]"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "[שאלה 2]",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[תשובה ישירה]"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "[שאלה 3]",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[תשובה ישירה]"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "[שאלה 4]",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[תשובה ישירה]"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "[שאלה 5]",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[תשובה ישירה]"
+      }
+    }
+  ]
+}
