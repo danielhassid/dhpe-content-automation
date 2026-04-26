@@ -13,14 +13,18 @@
 - [x] **צעד 9** — נבנה draft-ready-email.md עם תבנית מייל ההתראה
 - [x] **צעד 10** — הועלה ל-GitHub (commit + push)
 
-## שלבים שנותרו (11-14)
+## שלבים שנותרו (12-14)
 
-- [ ] **צעד 11** — הגדרת Routine ב-claude.ai/code/routines
+- [x] **צעד 11** — הוגדרו 4 שיגרות ב-claude.ai/code/routines (2026-04-26)
   - Repo: `danielhassid/dhpe-content-automation`
   - Skill: `dhpe-content-writer`
-  - Connectors: WordPress + Gmail
-  - Trigger כתיבה: ראשון + רביעי ב-08:00
-  - Trigger הזנה: שבת + שלישי ב-17:00
+  - Model: `claude-opus-4-7` (Opus 4.7)
+  - Environment: `daniel hassid`
+  - Triggers (Asia/Jerusalem, DST):
+    - `dhpe-feeding-sat` — שבת 21:00 (אחרי צאת שבת) — Gmail
+    - `dhpe-feeding-tue` — שלישי 17:00 — Gmail
+    - `dhpe-write-sun` — ראשון 08:00 — Gmail + WP REST API
+    - `dhpe-write-wed` — רביעי 08:00 — Gmail + WP REST API
 - [ ] **צעד 12** — הרצה ידנית ראשונה של מייל הזנה — בדיקה שמגיע נכון
 - [ ] **צעד 13** — הרצה ידנית ראשונה של כתיבת פוסט — בדיקה שהטיוטה מלאה
 - [ ] **צעד 14** — הפעלת לוח הזמנים האוטומטי (רק אחרי שצעדים 12-13 עובדים)
