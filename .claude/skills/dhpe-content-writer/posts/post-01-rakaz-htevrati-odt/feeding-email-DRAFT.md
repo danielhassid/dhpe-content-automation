@@ -1,9 +1,11 @@
 # Feeding email — drafted but NOT sent (SMTP egress blocked)
 
-**Run date:** 2026-05-30 (יום שבת)
+**Run date:** 2026-06-09 (יום שלישי, slot 17:00 — לפוסט ראשון של חודש 1 שבוע 1 שעדיין pending)
 **Mode:** feeding-email
-**Target post:** מה הרכז החברתי באמת צריך מפעילות ODT (חודש 1 / שבוע 1 / ראשון, נישה 1)
-**Status:** ❌ נחסם — SMTP egress (smtp.gmail.com:465/587/25) חסום בסנדבוקס. אותה תקלה כמו ב-RUN-LOG.md מהריצה הקודמת.
+**Target post:** מה הרכז החברתי באמת צריך מפעילות ODT (חודש 1 / שבוע 1 / ראשון, נישה 1 — ליבה)
+**Focus keyword:** ODT לבית ספר / מה רכז חברתי צריך מפעילות ODT
+**Angle:** מציג את ה-ODT דרך עיני הרכז/ת החברתי/ת — מה הם באמת מבקשים מהיום, מה הצורך מתחת לבקשה
+**Status:** ❌ נחסם — SMTP egress (smtp.gmail.com:465 ו-:587) חסום בסנדבוקס. אותה תקלה כמו ב-RUN-LOG מהריצה הקודמת ומה-DRAFT של 2026-05-30.
 
 ## תוכן המייל שהוכן
 
@@ -21,7 +23,7 @@
 
 ---
 
-תזכור לי שיחת תיאום אחרונה עם רכז חברתי שהזמין ODT לכיתה: מה הוא ביקש בדף ההזמנה, ומה הסתבר בפועל באותו יום שהוא באמת היה צריך מהפעילות? איפה הפער הזה צץ?
+תזכר ברכז/ת חברתי/ת ספציפי/ת שפנו אליך לקראת יום ODT, ובמהלך שיחת התיאום הבנת שמה שהם באמת צריכים זה לא מה שהם ביקשו בהתחלה. מה הם אמרו בהתחלה שהם רוצים מהיום, ומה גילית בפועל שהם היו צריכים?
 
 ---
 
@@ -30,29 +32,35 @@
 DHPE Content System
 ```
 
-## בדיקות שבוצעו
+## בדיקות שבוצעו בריצה הזו
 
 ```
-$ python3 smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=30)
-TimeoutError: timed out
+Attempt 1 — smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=30), default getaddrinfo:
+  OSError: [Errno 97] Address family not supported by protocol
+  (סנדבוקס לא תומך ב-IPv6; getaddrinfo החזיר תוצאות IPv6 ראשונות.)
 
-$ timeout 8 bash -c 'cat < /dev/tcp/smtp.gmail.com/465'   → exit 124
-$ timeout 8 bash -c 'cat < /dev/tcp/smtp.gmail.com/587'   → exit 124
-$ timeout 8 bash -c 'cat < /dev/tcp/smtp.gmail.com/25'    → exit 124
-$ timeout 8 curl https://smtp-relay.gmail.com             → 403
-$ timeout 8 curl https://gmail.googleapis.com/.../profile → 401 (reachable, but no OAuth token)
+Attempt 2 — smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=30), monkey-patched getaddrinfo → AF_INET only:
+  TimeoutError: timed out
+
+Attempt 3 — smtplib.SMTP('smtp.gmail.com', 587) + STARTTLS, AF_INET only:
+  TimeoutError: timed out
+
+Egress probes:
+  curl -m 8 telnet://smtp.gmail.com:587 → "Connection timed out after 8002 ms"
+  curl -m 8 telnet://smtp.gmail.com:465 → "Connection timed out after 8002 ms"
+  curl -m 10 https://gmail.googleapis.com → HTTP 404 (יציאה 443 פתוחה, ה-API בהישג יד דרך HTTPS)
 ```
 
-IPv4-only patch על `socket.getaddrinfo` נוסה — לא פתר. החסימה היא במדיניות ה-egress של הסנדבוקס.
+החסימה היא ברמת ה-egress policy של ה-environment — TCP אל יציאות SMTP (25/465/587) חסום. רק HTTPS (443) פתוח החוצה.
 
-## כדי להריץ ידנית
-
-מסביבה עם גישה ל-smtp.gmail.com:465:
+## כדי לשלוח ידנית מסביבה עם גישה
 
 ```bash
 PYTHONIOENCODING=utf-8 python3 /tmp/send_feeding.py
 ```
 
-(הסקריפט נשמר ב-`/tmp/send_feeding.py` בריצה זו — אם פג, ניתן לבנות מחדש מהבלוק שלמעלה.)
+(הסקריפט עם monkey-patch ל-IPv4 שמור ב-`/tmp/send_feeding.py` בריצה זו; ה-credentials: dh052597@gmail.com + app password.)
 
-או — אם רוצים לאפשר לסנדבוקס לשלוח: להוסיף `smtp.gmail.com:465` ל-egress allowlist של ה-environment.
+## פתרון מתמשך
+
+יש להוסיף `smtp.gmail.com:465` (או :587) ל-egress allowlist של ה-environment ב-Settings → Network policy של Claude Code on the web. חלופה: לעבור ל-Gmail API ב-HTTPS — אבל זה דורש OAuth2 access token במקום app password (לא יעבוד עם המפתח הנוכחי).
