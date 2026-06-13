@@ -1,16 +1,16 @@
-# Feeding email — drafted but NOT sent (SMTP egress blocked)
+# Feeding email — drafted but NOT sent (SMTP egress still blocked)
 
-**Run date:** 2026-06-09 (יום שלישי, slot 17:00 — לפוסט ראשון של חודש 1 שבוע 1 שעדיין pending)
+**Run date:** 2026-06-13 (יום שבת, slot 17:00 — לפוסט יום ראשון 2026-06-14)
 **Mode:** feeding-email
 **Target post:** מה הרכז החברתי באמת צריך מפעילות ODT (חודש 1 / שבוע 1 / ראשון, נישה 1 — ליבה)
 **Focus keyword:** ODT לבית ספר / מה רכז חברתי צריך מפעילות ODT
-**Angle:** מציג את ה-ODT דרך עיני הרכז/ת החברתי/ת — מה הם באמת מבקשים מהיום, מה הצורך מתחת לבקשה
-**Status:** ❌ נחסם — SMTP egress (smtp.gmail.com:465 ו-:587) חסום בסנדבוקס. אותה תקלה כמו ב-RUN-LOG מהריצה הקודמת ומה-DRAFT של 2026-05-30.
+**Angle:** הפער בין הבקשה ("אנחנו רוצים יום כיף") לצורך האמיתי של הרכז/ת החברתי/ת
+**Status:** ❌ נחסם שוב — SMTP egress (smtp.gmail.com:465) חסום. אותה חסימה כמו ב-RUN-LOG של post-01 ושל post-02, ו-DRAFTs מ-2026-05-30, 2026-06-02, 2026-06-09.
 
 ## תוכן המייל שהוכן
 
 **אל:** dh052597@gmail.com
-**נושא:** שאלה קצרה לפוסט הבא — מה הרכז החברתי באמת צריך מפעילות ODT
+**נושא:** שאלה קצרה לפוסט יום ראשון — מה הרכז החברתי באמת צריך מ-ODT
 
 **גוף:**
 
@@ -19,11 +19,13 @@
 
 ביום ראשון הקרוב עולה הפוסט: מה הרכז החברתי באמת צריך מפעילות ODT
 
-יש לי שאלה אחת קצרה — אם יש לך דקה, תשובה במשפט-שניים תעשה את הפוסט הרבה יותר אמיתי:
+זווית הפוסט: להראות שמה שרכזים חברתיים מבקשים בשיחת התיאום הוא לרוב לא מה שהם באמת זקוקים לו — וזה בדיוק היתרון שלך מול המתחרים שמדברים בשפת גיבוש עובדים ארגוני.
+
+יש לי שאלה אחת קצרה — תשובה של 2-3 משפטים תהפוך את הפוסט למשהו אמיתי במקום עוד תיאוריה:
 
 ---
 
-תזכר ברכז/ת חברתי/ת ספציפי/ת שפנו אליך לקראת יום ODT, ובמהלך שיחת התיאום הבנת שמה שהם באמת צריכים זה לא מה שהם ביקשו בהתחלה. מה הם אמרו בהתחלה שהם רוצים מהיום, ומה גילית בפועל שהם היו צריכים?
+זכור לי רכז/ת חברתי/ת אחד/ת ספציפי/ת שעבדת איתה בשנה האחרונה — מה היא ביקשה ממך בשיחת התיאום הראשונה (במילים שלה: "אנחנו רוצים..."), ומה היא אמרה לך אחרי היום שזה היה לה הכי חשוב שקרה? אני רוצה להציג בפוסט בדיוק את הפער הזה — בין הבקשה לצורך האמיתי.
 
 ---
 
@@ -37,30 +39,14 @@ DHPE Content System
 ```
 Attempt 1 — smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=30), default getaddrinfo:
   OSError: [Errno 97] Address family not supported by protocol
-  (סנדבוקס לא תומך ב-IPv6; getaddrinfo החזיר תוצאות IPv6 ראשונות.)
+  (סנדבוקס לא תומך ב-IPv6.)
 
 Attempt 2 — smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=30), monkey-patched getaddrinfo → AF_INET only:
   TimeoutError: timed out
-
-Attempt 3 — smtplib.SMTP('smtp.gmail.com', 587) + STARTTLS, AF_INET only:
-  TimeoutError: timed out
-
-Egress probes:
-  curl -m 8 telnet://smtp.gmail.com:587 → "Connection timed out after 8002 ms"
-  curl -m 8 telnet://smtp.gmail.com:465 → "Connection timed out after 8002 ms"
-  curl -m 10 https://gmail.googleapis.com → HTTP 404 (יציאה 443 פתוחה, ה-API בהישג יד דרך HTTPS)
 ```
 
-החסימה היא ברמת ה-egress policy של ה-environment — TCP אל יציאות SMTP (25/465/587) חסום. רק HTTPS (443) פתוח החוצה.
+זהה לחסימה ברמת ה-egress policy של ה-environment.
 
-## כדי לשלוח ידנית מסביבה עם גישה
+## פתרון
 
-```bash
-PYTHONIOENCODING=utf-8 python3 /tmp/send_feeding.py
-```
-
-(הסקריפט עם monkey-patch ל-IPv4 שמור ב-`/tmp/send_feeding.py` בריצה זו; ה-credentials: dh052597@gmail.com + app password.)
-
-## פתרון מתמשך
-
-יש להוסיף `smtp.gmail.com:465` (או :587) ל-egress allowlist של ה-environment ב-Settings → Network policy של Claude Code on the web. חלופה: לעבור ל-Gmail API ב-HTTPS — אבל זה דורש OAuth2 access token במקום app password (לא יעבוד עם המפתח הנוכחי).
+יש להוסיף `smtp.gmail.com:465` ל-egress allowlist של ה-environment ב-Settings → Network policy של Claude Code on the web. ראה https://code.claude.com/docs/en/claude-code-on-the-web. עד שזה ייפתר — כל ריצת feeding-email תיחסם.
