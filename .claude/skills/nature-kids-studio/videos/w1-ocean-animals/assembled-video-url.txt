@@ -1,0 +1,177 @@
+DRY RUN — assembled video URL: <pending — לא הורכב, ממתין להרצת מדיה אמיתית>
+
+==============================================================================
+ ASSEMBLED VIDEO PLAN — Ocean Animals for Kids — Meet the Sea!
+ עֵדֶן 🐿️ (Video Editor) · 2026-06-19 · DRY RUN
+ Slug: w1-ocean-animals · Type: Long-form · יחס מסך: 1920×1080 (אופקי)
+==============================================================================
+
+⚠️ DRY RUN — לא הופעלו adobe_mandatory_init / video_render / video_resize /
+   upscale_video. אין קטעי וידאו/אודיו אמיתיים (placeholders). לא נשרפו קרדיטים.
+   מקורות: video-brief.md (טל 🦚, 10 beats) · tts-brief.md (קולי 🦗, 9 segments)
+   · brand-voice.md (מוזיקת רקע אינסטרומנטלית, -12db מתחת לקריינות).
+
+------------------------------------------------------------------------------
+ 1) פרמטרי פרויקט
+------------------------------------------------------------------------------
+- Resolution: 1920 × 1080 (16:9 אופקי) — תקין ל-Long-form. אין צורך ב-video_resize
+  (כל ה-beats כבר 1920×1080). resize יידרש רק אם clip יחזור בגודל שונה.
+- Framerate: 30fps (n=30, d=1).
+- אורך timeline משוער: ~4:40 (280s) = 4:30 תוכן (270s) + End card ~7s (סופג חפיפה ל-~277-280s).
+- COPPA: End card ללא קישורים חיצוניים / call-to-subscribe / URLs. רק "Bye-bye" ויזואלי.
+
+------------------------------------------------------------------------------
+ 2) מבנה שכבות (Tracks) — מלמעלה למטה
+------------------------------------------------------------------------------
+TRACK A (video):  קטעי הווידאו של טל (10 beats / 9 visual shots) — מלא frame.
+TRACK B (audio):  קריינות קולי (9 segments) — שכבת ייחוס לעוצמה (0 dB / gain 1.0).
+TRACK C (audio):  מוזיקת רקע אינסטרומנטלית — gain מופחת ל-‎-12dB‎ מתחת לקריינות
+                  (gain ≈ 0.25 בקנה מידה לינארי ≈ -12dB). Loop/ducking לכל ה-timeline.
+
+הערה על סנכרון: הקריינות (~2:13 דיבור בפועל) קצרה מאורך ה-timeline (~4:30).
+זה מכוון — כל segment מיושר לתחילת ה-visual beat התואם לפי ה-timestamps של התסריט,
+והמרווחים ממולאים בתנועה ויזואלית + מוזיקת רקע + פאוזות טבעיות (לא רצף צמוד).
+
+------------------------------------------------------------------------------
+ 3) TIMELINE — יישור visual beats מול קטעי קריינות
+------------------------------------------------------------------------------
+מקרא: VID = קטע וידאו (טל) | VO = קריינות (קולי) | משך VO כולל [PAUSE 2s] היכן שמסומן.
+
+| #  | Beat        | חלון VID (timeline) | משך VID | VO segment | התחלת VO | משך VO | פאוזה |
+|----|-------------|---------------------|---------|------------|----------|--------|-------|
+| 01 | HOOK        | 0:00 – 0:20         | 20s     | Seg 1      | 0:00     | ~16s   | 2s    |
+| 02 | Dolphin     | 0:20 – 0:40         | 20s     | Seg 2      | 0:20     | ~12s   | —     |
+| 03 | Octopus     | 0:40 – 1:00         | 20s     | Seg 3      | 0:40     | ~12s   | —     |
+| 04 | Sea turtle  | 1:00 – 1:20         | 20s     | Seg 4      | 1:00     | ~12s   | —     |
+| 05 | Shark       | 1:20 – 1:45         | 25s     | Seg 5      | 1:20     | ~12s   | —     |
+| 06 | Sea horse   | 1:45 – 2:05         | 20s     | Seg 6      | 1:45     | ~12s   | —     |
+| 07 | Whale       | 2:05 – 2:30         | 25s     | Seg 7      | 2:05     | ~15s   | 2s    |
+| 08 | WOW-FACT    | 2:30 – 3:30         | 60s     | Seg 8      | 2:30     | ~20s   | 2s    |
+| 09 | (split opt) | — (מוזג ל-08)       | —       | —          | —        | —      | —     |
+| 10 | RECAP       | 3:30 – 4:30         | 60s     | Seg 9      | 3:30     | ~23s   | —     |
+|END | END CARD    | 4:30 – ~4:37        | ~7s     | (אין VO)   | —        | —      | —     |
+
+הערות יישור:
+- Beat 09 (split אופציונלי של WOW) — לא נדרש split; מכוסה במלואו ע"י VID של Beat 08
+  (60s). ה-VO של WOW (~20s) ממוקם בתחילת החלון; 40s הנותרים = תנועה ויזואלית + מוזיקה.
+- Beat 08 (60s VID) ו-Beat 10 (60s VID) ארוכים מה-VO שלהם — המרווח מתמלא ב-hold/תנועה
+  ויזואלית ומוזיקת רקע, בלי שתיקה מביכה.
+- כל ה-[PAUSE 2s] (segments 1, 7, 8) מיושמים כשתיקה בקצה ה-VO בתוך אותו חלון beat,
+  לפני תחילת ה-VO הבא — אין דריסה של הקריינות הבאה.
+
+------------------------------------------------------------------------------
+ 4) END CARD (4:30 – ~4:37, ~7s) — COPPA-safe
+------------------------------------------------------------------------------
+- ויזואל: סצנה אחרונה של RECAP נמשכת/דועכת ל-end card; Pip 🦉 מנופף לשלום + בועות לב.
+- טקסט מותר: "Bye-bye!" / "See you next time!" (חזותי בלבד, תואם לסיום הקריינות).
+- מוזיקת רקע ממשיכה ודועכת (fade-out) ב-2 השניות האחרונות.
+- אסור (COPPA): קישורים חיצוניים, URLs, כפתורי Subscribe/Like, איסוף פרטים, CTA חיצוני.
+- משך 7s נמצא בטווח הנדרש 5–10s ל-Long-form.
+
+------------------------------------------------------------------------------
+ 5) שכבות אודיו ועוצמות
+------------------------------------------------------------------------------
+- קריינות (VO, Track B): gain 1.0 (0 dB) — שכבת הייחוס.
+- מוזיקת רקע (Track C): ‎-12dB‎ מתחת לקריינות → gain ≈ 0.25 (לינארי).
+  אינסטרומנטלית, עליזה, רכה, ללא מילים (brand-voice.md). פרוסה לכל ה-timeline,
+  fade-in ב-0:00 (~1s) ו-fade-out בסוף End card (~2s).
+- בלי רעשי רקע מפחידים. טון שמח/רגוע/בטוח.
+
+==============================================================================
+ 6) פקודות מדויקות להרצה אמיתית (לא רצות ב-DRY RUN)
+==============================================================================
+
+שלב 0 (חובה לפני כל כלי Adobe):
+  adobe_mandatory_init(skill_name="nature-kids-studio", skill_version="0.1.0")
+
+תנאים מקדימים להרצה אמיתית:
+  - השלמת setup: Pip reference asset ID + Voice ID מולאו ב-brand-voice.md.
+  - 9 קטעי VO הופקו ע"י קולי (generate_audio) → asset IDs אמיתיים.
+  - 9-10 קטעי VID הופקו ע"י טל (generate_video) → asset IDs אמיתיים.
+  - קובץ מוזיקת רקע אינסטרומנטלי → asset ID.
+  - אימות מדויק של משכי כל clip ב-video_metadata לפני בניית ה-document.
+
+assetIds (סדר מקובע — ה-mediaIndex מתייחס לאינדקס במערך זה):
+  [0]  VID Beat01 HOOK        <VID_01_ASSET_ID>
+  [1]  VID Beat02 Dolphin     <VID_02_ASSET_ID>
+  [2]  VID Beat03 Octopus     <VID_03_ASSET_ID>
+  [3]  VID Beat04 Sea turtle  <VID_04_ASSET_ID>
+  [4]  VID Beat05 Shark       <VID_05_ASSET_ID>
+  [5]  VID Beat06 Sea horse   <VID_06_ASSET_ID>
+  [6]  VID Beat07 Whale       <VID_07_ASSET_ID>
+  [7]  VID Beat08 WOW-FACT    <VID_08_ASSET_ID>
+  [8]  VID Beat10 RECAP       <VID_10_ASSET_ID>
+  [9]  VID End card           <ENDCARD_ASSET_ID>   (או reuse mediaIndex 8 עם hold)
+  [10] VO Seg1 .. [18] VO Seg9   <VO_01..09_ASSET_ID>  (9 קטעי קריינות)
+  [19] Background music       <BGM_ASSET_ID>
+
+video_render(
+  assetIds: [ <כל ה-asset IDs לפי הסדר לעיל> ],
+  document: {
+    version: 1,
+    width: 1920,
+    height: 1080,
+    framerate: { n: 30, d: 1 },
+    tracks: [
+      // TRACK A — video (10 clips, רצף צמוד על ה-timeline)
+      { type: "video", clips: [
+        { mediaIndex: 0, sourceStart:{n:0,d:1}, sourceDuration:{n:20,d:1}, editStart:{n:0,d:1},   visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} },
+        { mediaIndex: 1, sourceStart:{n:0,d:1}, sourceDuration:{n:20,d:1}, editStart:{n:20,d:1},  visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} },
+        { mediaIndex: 2, sourceStart:{n:0,d:1}, sourceDuration:{n:20,d:1}, editStart:{n:40,d:1},  visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} },
+        { mediaIndex: 3, sourceStart:{n:0,d:1}, sourceDuration:{n:20,d:1}, editStart:{n:60,d:1},  visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} },
+        { mediaIndex: 4, sourceStart:{n:0,d:1}, sourceDuration:{n:25,d:1}, editStart:{n:80,d:1},  visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} },
+        { mediaIndex: 5, sourceStart:{n:0,d:1}, sourceDuration:{n:20,d:1}, editStart:{n:105,d:1}, visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} },
+        { mediaIndex: 6, sourceStart:{n:0,d:1}, sourceDuration:{n:25,d:1}, editStart:{n:125,d:1}, visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} },
+        { mediaIndex: 7, sourceStart:{n:0,d:1}, sourceDuration:{n:60,d:1}, editStart:{n:150,d:1}, visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} },
+        { mediaIndex: 8, sourceStart:{n:0,d:1}, sourceDuration:{n:60,d:1}, editStart:{n:210,d:1}, visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} },
+        { mediaIndex: 9, sourceStart:{n:0,d:1}, sourceDuration:{n:7,d:1},  editStart:{n:270,d:1}, visualTransform:{mode:"simple",scale:"fill",rotateDegrees:0} }
+      ]},
+      // TRACK B — VO קריינות (gain 1.0), מיושר ל-editStart של ה-beat התואם
+      { type: "audio", clips: [
+        { mediaIndex: 10, sourceStart:{n:0,d:1}, sourceDuration:{n:16,d:1}, editStart:{n:0,d:1},   audioTransform:{gain:1.0} },
+        { mediaIndex: 11, sourceStart:{n:0,d:1}, sourceDuration:{n:12,d:1}, editStart:{n:20,d:1},  audioTransform:{gain:1.0} },
+        { mediaIndex: 12, sourceStart:{n:0,d:1}, sourceDuration:{n:12,d:1}, editStart:{n:40,d:1},  audioTransform:{gain:1.0} },
+        { mediaIndex: 13, sourceStart:{n:0,d:1}, sourceDuration:{n:12,d:1}, editStart:{n:60,d:1},  audioTransform:{gain:1.0} },
+        { mediaIndex: 14, sourceStart:{n:0,d:1}, sourceDuration:{n:12,d:1}, editStart:{n:80,d:1},  audioTransform:{gain:1.0} },
+        { mediaIndex: 15, sourceStart:{n:0,d:1}, sourceDuration:{n:12,d:1}, editStart:{n:105,d:1}, audioTransform:{gain:1.0} },
+        { mediaIndex: 16, sourceStart:{n:0,d:1}, sourceDuration:{n:15,d:1}, editStart:{n:125,d:1}, audioTransform:{gain:1.0} },
+        { mediaIndex: 17, sourceStart:{n:0,d:1}, sourceDuration:{n:20,d:1}, editStart:{n:150,d:1}, audioTransform:{gain:1.0} },
+        { mediaIndex: 18, sourceStart:{n:0,d:1}, sourceDuration:{n:23,d:1}, editStart:{n:210,d:1}, audioTransform:{gain:1.0} }
+      ]},
+      // TRACK C — מוזיקת רקע ב-‎-12dB‎ (gain≈0.25), פרוסה לכל ה-timeline (~280s)
+      { type: "audio", clips: [
+        { mediaIndex: 19, sourceStart:{n:0,d:1}, sourceDuration:{n:277,d:1}, editStart:{n:0,d:1}, audioTransform:{gain:0.25} }
+      ]}
+    ]
+  }
+)
+
+הערות ליישום בהרצה אמיתית:
+- ה-sourceDuration/editStart לעיל מבוססים על אומדני התסריט. לפני render — לאמת כל משך
+  ב-video_metadata ולעדכן את ה-rationals כך שלא ייווצרו פערים/חפיפות.
+- אם ל-VO clip יש פאוזה מובנית בקובץ — להשאיר sourceDuration כולל הפאוזה; אם הפאוזה
+  מיושמת בעריכה — להוסיף silence padding או להזיז את ה-VO הבא בהתאם.
+- מוזיקת רקע: אם הקובץ קצר מ-277s — לשרשר/loop כמה clips ברצף על Track C עד הכיסוי.
+  fade-in ~1s ב-editStart 0, fade-out ~2s בסוף End card (ע"י gain ramp / clip קצר).
+- End card (mediaIndex 9): אם אין clip ייעודי — ניתן להאריך את RECAP (mediaIndex 8)
+  ל-67s במקום 60s ולוותר על clip נפרד, תוך שמירה על 5–10s ללא VO ובלי קישורים.
+
+אופציונלי (איכות גבוהה יותר, רק אחרי render מוצלח):
+  upscale_video(provider="topaz", video_id=<RENDERED_JOB_ID>, resolution="2160p", aspect_ratio="16:9")
+  או:
+  upscale_video(provider="bytedance", video_id=<RENDERED_JOB_ID>, width=1920, height=1080, resolution="4k", fps=30)
+
+------------------------------------------------------------------------------
+ 7) QA לפני Handoff לשומי 🛡️ (מפקח הבטיחות)
+------------------------------------------------------------------------------
+[x] יחס מסך 1920×1080 (Long-form) ✓
+[x] סנכרון VO ↔ visual beats לפי timestamps של התסריט ✓
+[x] מוזיקת רקע ‎-12dB‎ מתחת לקריינות (gain≈0.25) ✓
+[x] End card 5–10s (~7s) בלי קישורים חיצוניים (COPPA) ✓
+[x] בלי תוכן מפחיד; טון שמח/בטוח ✓
+[x] DRY RUN — render לא הופעל, לא נשרפו קרדיטים ✓
+[ ] (להרצה אמיתית) אימות משכים ב-video_metadata לכל clip לפני render
+
+==============================================================================
+ END OF PLAN
+==============================================================================
