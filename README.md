@@ -1,5 +1,17 @@
 # DHPE Content Automation
 
+ריפו אוטומציית תוכן. מכיל שני skills:
+
+1. **`dhpe-content-writer`** — פוסטי SEO לאתר [dhpe.co.il](https://dhpe.co.il) (ראה למטה).
+2. **`nature-kids-studio`** — ערוץ יוטיוב "טבע לילדים" באנגלית (ראה
+   `.claude/skills/nature-kids-studio/SKILL.md` ו-`setup/setup-guide.md`).
+   Shorts + 2 סרטוני 3-5 דק' בשבוע, דמות מנחה Pip 🦉, שער בטיחות Inspector,
+   ושערי אישור אנושי. ערוץ `made-for-kids`.
+
+---
+
+## dhpe-content-writer
+
 מערכת אוטומציית תוכן לאתר [dhpe.co.il](https://dhpe.co.il) — דניאל חסיד פרויקטים בחינוך.
 
 ## מה המערכת עושה

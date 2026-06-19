@@ -1,0 +1,30 @@
+{
+  "_comment": "תבנית payload ל-YouTube Data API v3 videos.insert. מלא placeholders. שמור כ-videos/[slug]/youtube-payload.json",
+  "snippet": {
+    "title": "[<=60 תווים, מילת מפתח ב-30 הראשונים]",
+    "description": "[תיאור מלא מ-seo-package.md, כולל timestamps ל-Long-form]",
+    "tags": ["[keyword]", "[secondary1]", "[secondary2]", "for kids", "educational", "Pip the owl"],
+    "categoryId": "27",
+    "defaultLanguage": "en",
+    "defaultAudioLanguage": "en"
+  },
+  "status": {
+    "privacyStatus": "private",
+    "_privacyStatus_note": "ריצות ראשונות: 'private' עד אישור אנושי. אחרי בלוק יציבות: 'scheduled' עם publishAt.",
+    "publishAt": "[YYYY-MM-DDT21:00:00Z — מבוסס-נתונים, לא קבוע]",
+    "selfDeclaredMadeForKids": true,
+    "_madeForKids_note": "חוק ברזל — חובה true, מאומת ע\"י Inspector לפני העלאה",
+    "madeForKids": true,
+    "license": "youtube",
+    "embeddable": true
+  },
+  "_playlists": {
+    "_note": "אחרי videos.insert — playlistItems.insert לכל אחד",
+    "topic_playlist_id": "[TO_BE_FILLED]",
+    "new_videos_playlist_id": "[TO_BE_FILLED]"
+  },
+  "_upload_gate": {
+    "first_runs": "מעלה private + שולח מייל אישור. רק אחרי אישור → public/scheduled.",
+    "inspector_passed_required": true
+  }
+}

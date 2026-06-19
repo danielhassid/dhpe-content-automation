@@ -1,3 +1,21 @@
+# סטטוס התקדמות
+
+## Nature Kids Studio (ערוץ יוטיוב טבע לילדים)
+
+- [x] מבנה תיקיות `.claude/skills/nature-kids-studio/`
+- [x] knowledge/ (brand-voice, educational-framework, age-targeting, youtube-algorithm,
+      kids-safety-policy, keyword-bank, credentials-guide, team-improvements)
+- [x] templates/ (short-script, long-script, seo-package, inspector-checklist, youtube-payload)
+- [x] content-calendar/ (rotation-logic, 30-day-plan)
+- [x] setup/setup-guide.md (הקמה צעד-צעד)
+- [x] SKILL.md (Short / Long / Analytics / Coach + Inspector + שערי אישור)
+- [ ] **הקמה ידנית** — בצע `setup/setup-guide.md` (ערוץ, API, OAuth, Pip, Routines)
+- [ ] **ריצת יבש** — מצב Long-form ללא העלאה, בדיקת `videos/[slug]/`
+- [ ] **העלאה ראשונה** — private + אישור ידני
+- [ ] **הפעלת Routines** — אחרי 3 ריצות יציבות
+
+---
+
 # DHPE Content Automation — סטטוס התקדמות
 
 ## שלבים שבוצעו (1-10)
