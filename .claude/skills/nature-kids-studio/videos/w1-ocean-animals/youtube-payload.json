@@ -1,0 +1,54 @@
+{
+  "_comment": "YouTube Data API v3 videos.insert payload — נבנה ע\"י דפנה 🕊️ (distribution-manager) מתוך templates/youtube-payload.json + seo-package.md (נמי 🐜).",
+  "_dryRun": true,
+  "_dryRun_note": "🧪 DRY RUN — ההעלאה מושבתת. לא בוצע videos.insert / playlistItems.insert, לא עודכן 30-day-plan, ולא נשלח מייל אישור. אין YouTube connector מוגדר וההקמה (setup) לא בוצעה. ה-payload הוא artifact בלבד.",
+  "_slug": "w1-ocean-animals",
+  "_type": "Long-form",
+  "_inspectorStatus": "PASS",
+  "_videoFile": "<pending — DRY RUN, no assembled media>",
+  "snippet": {
+    "title": "Ocean Animals for Kids — Meet the Sea!",
+    "description": "Ocean animals for kids! Dive under the sea with Pip the Owl and meet friendly sea animals.\n\nLearn about a happy dolphin, a color-changing octopus, a gentle sea turtle, a smiling shark, a tiny sea horse, and the giant blue whale. A fun, gentle nature video that helps little ones discover ocean for kids and learn sea animals.\n\n0:00 Meet Pip & dive in!\n0:20 Explore ocean animals\n2:30 Wow Fact: the giant blue whale\n3:30 Recap: all our sea friends\n\nJoin Pip the Owl on a nature adventure!\n\n#oceananimalsforkids #natureforkids #learningforkids #animalsforkids #underthesea #seaanimals",
+    "tags": [
+      "ocean animals for kids",
+      "sea animals for kids",
+      "under the sea for kids",
+      "ocean for kids",
+      "marine life for kids",
+      "learn sea animals",
+      "ocean",
+      "for kids",
+      "educational",
+      "nature for kids",
+      "Pip the owl"
+    ],
+    "categoryId": "27",
+    "defaultLanguage": "en",
+    "defaultAudioLanguage": "en"
+  },
+  "status": {
+    "privacyStatus": "private",
+    "_privacyStatus_note": "ריצות ראשונות (3 ראשונות): 'private' עד אישור אנושי. אחרי בלוק יציבות: 'scheduled' עם publishAt (~21:00 UTC).",
+    "publishAt": null,
+    "_publishAt_note": "DRY RUN — לא מתוזמן. בריצה אמיתית מתוזמן ל-21:00 UTC (seo-package: publishTimeUTC 21:00) רק אחרי אישור אנושי.",
+    "selfDeclaredMadeForKids": true,
+    "_madeForKids_note": "חוק ברזל — true, מאומת ע\"י Inspector (inspector-report.md: PASS).",
+    "madeForKids": true,
+    "license": "youtube",
+    "embeddable": true
+  },
+  "_playlists": {
+    "_note": "בריצה אמיתית, אחרי videos.insert → playlistItems.insert לכל אחד. לא בוצע ב-DRY RUN.",
+    "topic_playlist": "Ocean & Sea Animals",
+    "topic_playlist_id": "<TO_BE_FILLED — setup לא בוצע>",
+    "new_videos_playlist": "New Videos",
+    "new_videos_playlist_id": "<TO_BE_FILLED — setup לא בוצע>"
+  },
+  "_upload_gate": {
+    "first_runs": "מעלה private + שולח מייל אישור ל-dh052597@gmail.com. רק אחרי אישור → scheduled/public.",
+    "inspector_passed_required": true,
+    "inspector_passed": true,
+    "uploadExecuted": false,
+    "approvalEmailSent": false
+  }
+}
