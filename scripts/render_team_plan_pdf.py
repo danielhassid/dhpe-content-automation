@@ -132,46 +132,44 @@ bullet("הסוכנים \"מדברים\" ביניהם דרך קבצים משות�
 bullet("ה-skill הקיים nature-kids-studio נשאר — הוא הופך ל\"ספר הנהלים\" + מאגר הידע שכל סוכן קורא ממנו.")
 
 H2("ארכיטקטורת הצוות (הצעה התחלתית)")
-para("זו נקודת המוצא בלבד. הרשימה הסופית תיקבע ע\"י סוכן-האדריכל ותאושר על ידך (שלב 3).",
+para("זו נקודת המוצא בלבד. הרשימה הסופית תיקבע ע\"י אדריכל הצוות ותאושר על ידך (שלב 3).",
+     color=GREY)
+para("לכל סוכן שם עברי (זהות הצוות) + מזהה טכני באנגלית שמשמש את הקובץ וההפעלה.",
      color=GREY)
 
 # ---------- Roster table ----------
 rows = [
-    ("#", "סוכן", "ייעוד", "פלט עיקרי"),
-    ("1", "team-architect", "חוקר ומציע את הצוות", "PROPOSED-TEAM.md"),
-    ("2", "studio-orchestrator", "מנהל ומאציל את כל הריצה", "RUN-LOG.md"),
-    ("3", "trend-researcher", "מחקר מילות מפתח ונושאים", "research-brief.md"),
-    ("4", "scriptwriter", "כתיבת תסריט Short/Long", "script-final.md"),
-    ("5", "art-director", "יצירת וידאו וויזואל", "video-brief.md"),
-    ("6", "voice-producer", "קריינות TTS", "tts-brief.md"),
-    ("7", "video-editor", "הרכבת הסרטון הסופי", "assembled-video"),
-    ("8", "safety-inspector", "בדיקת בטיחות + וטו", "inspector-report.md"),
-    ("9", "seo-strategist", "מטא-דאטה ל-SEO", "seo-package.md"),
-    ("10", "publisher", "העלאה + אישור אנושי", "youtube-payload.json"),
-    ("11", "analytics-analyst", "דוח ביצועים שבועי", "analytics-snapshot.md"),
-    ("12", "team-coach", "הצעות שיפור לצוות", "team-improvements.md"),
+    ("#", "שם עברי", "מזהה טכני", "ייעוד"),
+    ("1", "אדריכל הצוות", "team-architect", "חוקר ומציע את הצוות"),
+    ("2", "מפיק הסטודיו", "studio-orchestrator", "מנהל ומאציל את כל הריצה"),
+    ("3", "חוקר הטרנדים", "trend-researcher", "מחקר מילות מפתח ונושאים"),
+    ("4", "התסריטאי", "scriptwriter", "כתיבת תסריט Short/Long"),
+    ("5", "המנהל האמנותי", "art-director", "יצירת וידאו וויזואל"),
+    ("6", "מפיק הקריינות", "voice-producer", "קריינות TTS"),
+    ("7", "עורך הווידאו", "video-editor", "הרכבת הסרטון הסופי"),
+    ("8", "מפקח הבטיחות", "safety-inspector", "בדיקת בטיחות + וטו"),
+    ("9", "אסטרטג ה-SEO", "seo-strategist", "מטא-דאטה ל-SEO"),
+    ("10", "מנהל ההפצה", "publisher", "העלאה + אישור אנושי"),
+    ("11", "אנליסט הנתונים", "analytics-analyst", "דוח ביצועים שבועי"),
+    ("12", "מאמן הצוות", "team-coach", "הצעות שיפור לצוות"),
 ]
-# column widths (RTL: render right-to-left). Order visually: # | סוכן | ייעוד | פלט
-cw = [12, 42, 62, 58]  # sums to 174 = W
-pdf.set_font("Dejavu", "B", 9.5)
+# column widths. Visual order RTL: # | שם עברי | מזהה טכני | ייעוד
+cw = [10, 40, 46, 78]  # sums to 174 = W
 for i, (c0, c1, c2, c3) in enumerate(rows):
     if i == 0:
         pdf.set_fill_color(*GREEN)
         pdf.set_text_color(255, 255, 255)
         pdf.set_font("Dejavu", "B", 9.5)
-        fill = True
     else:
         pdf.set_fill_color(*(SAND if i % 2 else (255, 255, 255)))
         pdf.set_text_color(*INK)
         pdf.set_font("Dejavu", "", 9)
-        fill = True
-    x = 18
-    # render columns left-to-right but content reversed for RTL feel: put פלט on left, # on right
-    pdf.set_x(x)
-    pdf.cell(cw[3], 7, rtl(c3), border=0, fill=fill, align="R")
-    pdf.cell(cw[2], 7, rtl(c2), border=0, fill=fill, align="R")
-    pdf.cell(cw[1], 7, c1, border=0, fill=fill, align="R")
-    pdf.cell(cw[0], 7, rtl(c0), border=0, fill=fill, align="C")
+    pdf.set_x(18)
+    # left-to-right render so RTL reading order is: # | שם עברי | מזהה | ייעוד
+    pdf.cell(cw[3], 7, rtl(c3), border=0, fill=True, align="R")
+    pdf.cell(cw[2], 7, (c2 if i else rtl(c2)), border=0, fill=True, align="R")
+    pdf.cell(cw[1], 7, rtl(c1), border=0, fill=True, align="R")
+    pdf.cell(cw[0], 7, rtl(c0), border=0, fill=True, align="C")
     pdf.ln(7)
 pdf.ln(2)
 
@@ -180,24 +178,24 @@ pdf.add_page()
 H1("סדר הבנייה (אדריכל קודם)")
 box(["מיד עם אישורך אפיק את התוכנית הזו כ-PDF בעברית (המסמך שאתה קורא).",
      "לא בונה כלום עד שתסתכל ותאשר."], title="שלב 0 — PDF של התוכנית")
-para("שלב 1 — בניית team-architect בלבד (Opus): סוכן יחיד שמתמחה בעיצוב צוותים.")
-para("שלב 2 — הרצת האדריכל: חוקר (רשת + הריפו + הידע הקיים) ומפיק PROPOSED-TEAM.md — הצעת צוות מפורטת: לכל סוכן ייעוד, כלים, מודל, קלט/פלט, handoffs ומדדי הצלחה.")
+para("שלב 1 — בניית אדריכל הצוות (team-architect) בלבד, על Opus: סוכן יחיד שמתמחה בעיצוב צוותים.")
+para("שלב 2 — הרצת אדריכל הצוות: חוקר (רשת + הריפו + הידע הקיים) ומפיק PROPOSED-TEAM.md — הצעת צוות מפורטת: לכל סוכן שם עברי, ייעוד, כלים, מודל, קלט/פלט, handoffs ומדדי הצלחה.")
 box(["אמיר את הצעת האדריכל ל-PDF בעברית ואשלח.",
      "תוכל לשנות / להוסיף / להסיר סוכנים. רק אחרי אישורך ממשיכים."],
     title="שלב 3 — עצירה לאישורך")
 para("שלב 4 — בניית כל הסוכנים שאושרו ב-.claude/agents/ (כולם Opus).")
 para("שלב 5 — חיווט: עדכון ה-skill כך שהמפיק יאציל כל שלב לסוכן המתאים; הגדרת ה-handoffs וקבצי ה-RUN-LOG.")
-para("שלב 6 — שיפור הצוות: analytics-analyst + team-coach פועלים שבועית ומציעים שדרוגים — הצעות בלבד, באישורך. זה ה\"נשפר את הצוות\".")
+para("שלב 6 — שיפור הצוות: אנליסט הנתונים (analytics-analyst) + מאמן הצוות (team-coach) פועלים שבועית ומציעים שדרוגים — הצעות בלבד, באישורך. זה ה\"נשפר את הצוות\".")
 
 H2("שערי בקרה אנושיים (נשמרים)")
 bullet("אישור רשימת הצוות — אחרי שהאדריכל מציע (שלב 3).")
-bullet("safety-inspector — וטו אוטומטי על תוכן שאינו בטוח לילדים.")
+bullet("מפקח הבטיחות (safety-inspector) — וטו אוטומטי על תוכן שאינו בטוח לילדים.")
 bullet("3 העלאות ראשונות — private + מייל אישור לפני פרסום.")
-bullet("שינויי team-coach — הצעות בלבד, רק מה שתאשר נכנס.")
+bullet("שינויי מאמן הצוות (team-coach) — הצעות בלבד, רק מה שתאשר נכנס.")
 bullet("סודות (מפתחות/טוקנים) — משתני סביבה בלבד, אף פעם לא בגיט.")
 
 H2("הצעד הבא")
-para("באישור התוכנית: (1) אפיק את ה-PDF הזה לסקירה; (2) אם תאשר — אבנה את team-architect, אריץ אותו, ואחזיר לך הצעת-צוות כ-PDF בעברית לאישור לפני בניית שאר הסוכנים.")
+para("באישור התוכנית: (1) אפיק את ה-PDF הזה לסקירה; (2) אם תאשר — אבנה את אדריכל הצוות (team-architect), אריץ אותו, ואחזיר לך הצעת-צוות כ-PDF בעברית לאישור לפני בניית שאר הסוכנים.")
 
 import os
 os.makedirs("docs", exist_ok=True)
