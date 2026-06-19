@@ -55,8 +55,18 @@ def para(t, size=10, color=INK):
     pdf.ln(0.4)
 
 
+PERSONA = {
+    "team-architect": "בוני (בונה)", "studio-orchestrator": "מאיה (דבורה)",
+    "trend-researcher": "רוני (שועל)", "scriptwriter": "זמיר (ציפור)",
+    "art-director": "טל (טווס)", "voice-producer": "קולי (צרצר)",
+    "seo-strategist": "נמי (נמלה)", "video-editor": "עדן (סנאי)",
+    "safety-inspector": "שומי (דוב)", "publisher": "דפנה (יונה)",
+    "analytics-analyst": "טוביה (חפרפרת)", "team-coach": "אלון (פיל)",
+}
+
+
 def agent_card(num, he, slug, lines):
-    if pdf.get_y() > 250:
+    if pdf.get_y() > 248:
         pdf.add_page()
     pdf.set_fill_color(*CARDBG)
     pdf.set_draw_color(*LEAF)
@@ -67,7 +77,8 @@ def agent_card(num, he, slug, lines):
     pdf.set_x(20)
     pdf.set_font("Dejavu", "B", 11.5)
     pdf.set_text_color(*GREEN)
-    pdf.cell(W - 4, 6.5, rtl(f"{num}. {he}   ·   {slug}"), align="R")
+    persona = PERSONA.get(slug, "")
+    pdf.cell(W - 4, 6.5, rtl(f"{num}. {persona} — {he}   ·   {slug}"), align="R")
     pdf.ln(7)
     pdf.set_font("Dejavu", "", 9.5)
     pdf.set_text_color(*INK)
@@ -99,39 +110,39 @@ pdf.multi_cell(W, 8, rtl("\"טבע לילדים\" · הופק ע\"י אדריכ�
 pdf.set_y(66)
 pdf.set_font("Dejavu", "", 9.5)
 pdf.set_text_color(*GREY)
-pdf.multi_cell(W, 5.4, rtl("מסמך לאישור · 12 סוכנים · כולם על מודל Opus · ממופה על הצנרת הקיימת ב-SKILL.md"),
+pdf.multi_cell(W, 5.4, rtl("אושר 19/06/2026 · 12 סוכנים נבנו · כולם על Opus · YouTube דרך connector · שמות-דמות אישיים"),
                align="R")
 pdf.ln(3)
 
 H2("טבלת הצוות")
 rows = [
-    ("#", "שם עברי", "מזהה טכני", "שלב בצנרת"),
-    ("1", "אדריכל הצוות", "team-architect", "מטא — עיצוב הצוות"),
-    ("2", "מפיק הסטודיו", "studio-orchestrator", "ניהול (שלב 1+8)"),
-    ("3", "חוקר הטרנדים", "trend-researcher", "מחקר (שלב 2)"),
-    ("4", "התסריטאי", "scriptwriter", "תסריט (שלב 3)"),
-    ("5", "המנהל האמנותי", "art-director", "וידאו (שלב 4a)"),
-    ("6", "מפיק הקריינות", "voice-producer", "קריינות (שלב 4b)"),
-    ("7", "אסטרטג ה-SEO", "seo-strategist", "SEO (שלב 4c)"),
-    ("8", "עורך הווידאו", "video-editor", "הרכבה (שלב 5)"),
-    ("9", "מפקח הבטיחות", "safety-inspector", "וטו (שלב 6)"),
-    ("10", "מנהל ההפצה", "publisher", "העלאה (שלב 7)"),
-    ("11", "אנליסט הנתונים", "analytics-analyst", "Analytics"),
-    ("12", "מאמן הצוות", "team-coach", "Coach"),
+    ("#", "דמות", "שם תפקיד", "מזהה טכני"),
+    ("1", "בוני (בונה)", "אדריכל הצוות", "team-architect"),
+    ("2", "מאיה (דבורה)", "מפיק הסטודיו", "studio-orchestrator"),
+    ("3", "רוני (שועל)", "חוקר הטרנדים", "trend-researcher"),
+    ("4", "זמיר (ציפור)", "התסריטאי", "scriptwriter"),
+    ("5", "טל (טווס)", "המנהל האמנותי", "art-director"),
+    ("6", "קולי (צרצר)", "מפיק הקריינות", "voice-producer"),
+    ("7", "נמי (נמלה)", "אסטרטג ה-SEO", "seo-strategist"),
+    ("8", "עדן (סנאי)", "עורך הווידאו", "video-editor"),
+    ("9", "שומי (דוב)", "מפקח הבטיחות", "safety-inspector"),
+    ("10", "דפנה (יונה)", "מנהל ההפצה", "publisher"),
+    ("11", "טוביה (חפרפרת)", "אנליסט הנתונים", "analytics-analyst"),
+    ("12", "אלון (פיל)", "מאמן הצוות", "team-coach"),
 ]
-cw = [10, 42, 48, 74]
+cw = [10, 44, 46, 74]
 for i, (c0, c1, c2, c3) in enumerate(rows):
     if i == 0:
         pdf.set_fill_color(*GREEN); pdf.set_text_color(255, 255, 255); pdf.set_font("Dejavu", "B", 9.5)
     else:
         pdf.set_fill_color(*(SAND if i % 2 else (255, 255, 255))); pdf.set_text_color(*INK); pdf.set_font("Dejavu", "", 9)
     pdf.set_x(18)
-    pdf.cell(cw[3], 7, rtl(c3), border=0, fill=True, align="R")
-    pdf.cell(cw[2], 7, (c2 if i else rtl(c2)), border=0, fill=True, align="R")
+    pdf.cell(cw[3], 7, (c3 if i else rtl(c3)), border=0, fill=True, align="R")
+    pdf.cell(cw[2], 7, rtl(c2), border=0, fill=True, align="R")
     pdf.cell(cw[1], 7, rtl(c1), border=0, fill=True, align="R")
     pdf.cell(cw[0], 7, rtl(c0), border=0, fill=True, align="C")
     pdf.ln(7)
-para("⚠️ = תלוי ב-YouTube connector שמוגדר ב-setup (אין כרגע כלי MCP ישיר ל-YouTube).",
+para("⚠️ דפנה (מנהל ההפצה) וטוביה (אנליסט) — YouTube דרך ה-connector שמוגדר ב-setup.",
      size=8.5, color=GREY)
 
 # ---------- Detail cards ----------

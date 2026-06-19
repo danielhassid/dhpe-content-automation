@@ -9,6 +9,10 @@
 - [x] content-calendar/ (rotation-logic, 30-day-plan)
 - [x] setup/setup-guide.md (הקמה צעד-צעד)
 - [x] SKILL.md (Short / Long / Analytics / Coach + Inspector + שערי אישור)
+- [x] **צוות סוכנים** ב-`.claude/agents/` — בּוֹני 🦫 אדריכל הצוות נבנה והורץ, והפיק
+      `PROPOSED-TEAM.md`; **12 סוכנים נבנו** (כולם Opus, שמות-דמות אישיים): מאיה 🐝,
+      רוני 🦊, זמיר 🐦, טל 🦚, קולי 🦗, נמי 🐜, עֵדֶן 🐿️, שומי 🐻, דפנה 🕊️, טוביה 🐭, אלון 🐘.
+- [x] **חיווט** — `SKILL.md` כולל טבלת האצלה (שלב → סוכן). YouTube דרך connector מ-setup.
 - [ ] **הקמה ידנית** — בצע `setup/setup-guide.md` (ערוץ, API, OAuth, Pip, Routines)
 - [ ] **ריצת יבש** — מצב Long-form ללא העלאה, בדיקת `videos/[slug]/`
 - [ ] **העלאה ראשונה** — private + אישור ידני

@@ -1,8 +1,10 @@
 # הצעת צוות הסוכנים — "טבע לילדים"
 
-> **מסמך לאישור.** הופק ע"י *אדריכל הצוות* (team-architect) לאחר קריאת `SKILL.md`,
-> קבצי ה-knowledge וה-templates. כל סוכן ממופה על שלב אמיתי בצנרת ועל כלים זמינים.
-> אתה מאשר / משנה / מסיר — ורק אחר כך נבנים הסוכנים בפועל.
+> ✅ **אושר (19/06/2026):** כל 12 הסוכנים אושרו ונבנו ב-`.claude/agents/`.
+> YouTube דרך ה-connector שמוגדר ב-setup. כל סוכן קיבל **שם-דמות אישי**.
+>
+> הופק ע"י *בּוֹני — אדריכל הצוות* (team-architect) לאחר קריאת `SKILL.md`, קבצי ה-knowledge
+> וה-templates. כל סוכן ממופה על שלב אמיתי בצנרת ועל כלים זמינים.
 
 ## איך לקרוא
 
@@ -13,20 +15,20 @@
 
 ## טבלת הצוות (12 סוכנים)
 
-| # | שם עברי | מזהה טכני | שלב בצנרת | כלים עיקריים |
+| # | דמות | שם תפקיד | מזהה טכני | שלב בצנרת |
 |---|---|---|---|---|
-| 1 | אדריכל הצוות | `team-architect` | מטא — עיצוב הצוות | Read, WebSearch, Write |
-| 2 | מפיק הסטודיו | `studio-orchestrator` | שלב 1 + 8 (ניהול) | Read, Write, Gmail |
-| 3 | חוקר הטרנדים | `trend-researcher` | שלב 2 — מחקר | Ahrefs, Read, Write |
-| 4 | התסריטאי | `scriptwriter` | שלב 3 — תסריט | Read, Write |
-| 5 | המנהל האמנותי | `art-director` | שלב 4a — וידאו | Higgsfield (image/video) |
-| 6 | מפיק הקריינות | `voice-producer` | שלב 4b — קריינות | Higgsfield (audio/voices) |
-| 7 | אסטרטג ה-SEO | `seo-strategist` | שלב 4c — SEO | Ahrefs, Read, Write |
-| 8 | עורך הווידאו | `video-editor` | שלב 5 — הרכבה | Adobe `video_render` |
-| 9 | מפקח הבטיחות | `safety-inspector` | שלב 6 — וטו | Read, Write |
-| 10 | מנהל ההפצה | `publisher` | שלב 7 — העלאה | YouTube API ⚠️, Gmail |
-| 11 | אנליסט הנתונים | `analytics-analyst` | מצב Analytics | YouTube API ⚠️, Write |
-| 12 | מאמן הצוות | `team-coach` | מצב Coach | Read, Write |
+| 1 | בּוֹני 🦫 | אדריכל הצוות | `team-architect` | מטא — עיצוב הצוות |
+| 2 | מאיה 🐝 | מפיק הסטודיו | `studio-orchestrator` | שלב 1 + 8 (ניהול) |
+| 3 | רוני 🦊 | חוקר הטרנדים | `trend-researcher` | שלב 2 — מחקר |
+| 4 | זמיר 🐦 | התסריטאי | `scriptwriter` | שלב 3 — תסריט |
+| 5 | טל 🦚 | המנהל האמנותי | `art-director` | שלב 4a — וידאו |
+| 6 | קולי 🦗 | מפיק הקריינות | `voice-producer` | שלב 4b — קריינות |
+| 7 | נמי 🐜 | אסטרטג ה-SEO | `seo-strategist` | שלב 4c — SEO |
+| 8 | עֵדֶן 🐿️ | עורך הווידאו | `video-editor` | שלב 5 — הרכבה |
+| 9 | שומי 🐻 | מפקח הבטיחות | `safety-inspector` | שלב 6 — וטו |
+| 10 | דפנה 🕊️ | מנהל ההפצה | `publisher` | שלב 7 — העלאה (connector) |
+| 11 | טוביה 🐭 | אנליסט הנתונים | `analytics-analyst` | מצב Analytics |
+| 12 | אלון 🐘 | מאמן הצוות | `team-coach` | מצב Coach |
 
 ⚠️ = תלוי ב-YouTube connector שמוגדר ב-`setup/setup-guide.md` (אין כרגע כלי MCP ישיר ל-YouTube).
 
