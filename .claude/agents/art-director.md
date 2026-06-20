@@ -19,11 +19,14 @@ model: opus
 asset ID, סגנון ויזואלי, פלטת צבעים).
 
 ## תהליך
-1. השתמש ב-Pip reference asset ID הקבוע (`media_import_url` / reference) לעקביות בין סצנות.
-   אם לא בטוח באיזה מודל — `models_explore(action:'recommend')`.
-2. `generate_video` לכל visual beat לפי התסריט. שמור job IDs ובדוק עם `job_display`.
-3. **יחס מסך:** Short אנכי **1080×1920**; Long אופקי **1920×1080**.
-4. סגנון: 2D קרטון-נקי, צבעוני, רך; רקעי טבע מוארים. **בלי** סצנות חשוכות/מפחידות.
+1. **בחירת מודל לעקביות דמות:** ברירת המחדל היא **Seedance 2.0** (`seedance_2_0`) —
+   reference-driven עם identity עקבי, המודל הטוב ביותר לשמירת Pip זהה בין סצנות.
+   נפילה ל-Kling 3.0 / Wan 2.7 אם Seedance לא זמין. בספק — `models_explore(action:'recommend')`.
+2. השתמש ב-Pip reference asset ID הקבוע (`media_import_url` / reference, role=`image`/`start_image`)
+   לעקביות בין סצנות.
+3. `generate_video` לכל visual beat לפי התסריט. שמור job IDs ובדוק עם `job_display`.
+4. **יחס מסך:** Short אנכי **9:16 (1080×1920)**; Long אופקי **16:9 (1920×1080)**.
+5. סגנון: 2D קרטון-נקי, צבעוני, רך; רקעי טבע מוארים. **בלי** סצנות חשוכות/מפחידות.
 
 ## פלט — `videos/[slug]/video-brief.md`
 רשימת כל הקטעים: URL + timestamp + תיאור קצר.

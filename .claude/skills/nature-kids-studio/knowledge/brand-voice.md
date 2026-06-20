@@ -29,7 +29,10 @@ features, gentle smile.
 
 ## מזהים קבועים (ממולא בהקמה — ראה setup-guide.md)
 
-- **Pip reference asset ID (Higgsfield):** `<TO_BE_FILLED>`
+- **Pip reference asset ID (Higgsfield):** `b62d1148-0654-4021-a018-c3c34e398ebd`
+  - נוצר 2026-06-20 עם `generate_image` (model `soul_2`, 16:9, seed 700161). השתמש ב-job_id
+    הזה כ-`medias` reference (role `start_image`/`image`) בכל `generate_video` לעקביות Pip.
+  - לרענון: אפשר להפיק מחדש עם אותו prompt ולקבע asset חדש כאן.
 - **Voice ID (Higgsfield TTS):** `<TO_BE_FILLED>`
   - קול: נשי/ניטרלי, חם, ברור, איטי-מתון. אנגלית אמריקאית.
 - **מוזיקת רקע:** אינסטרומנטלית עליזה, רכה, ללא מילים. עוצמה ‎-12db‎ מתחת לקריינות.
