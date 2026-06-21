@@ -1,0 +1,8 @@
+name = "dhpe-telegram-bot"
+main = "worker.js"
+compatibility_date = "2025-06-01"
+
+# Secrets — set via terminal (not here):
+# wrangler secret put TELEGRAM_BOT_TOKEN
+# wrangler secret put ANTHROPIC_API_KEY
+# wrangler secret put ALLOWED_USER_ID
