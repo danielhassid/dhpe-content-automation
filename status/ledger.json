@@ -1,0 +1,158 @@
+{
+  "_about": "מקור האמת היחיד (Single Source of Truth) לכל המשימות והריצות של DHPE. כל סוכן/תדריך (מקיסמה, עומרי, יאסר...) חייב לקרוא מכאן ולרנדר רק פריטים אקטיביים. אף רשימה לא נבנית מהזיכרון. עדכונים נכנסים דרך status/updates.inbox.md וסוכן הסנכרון מיישם אותם.",
+  "_status_vocab": {
+    "open": "משימה אמיתית שטרם בוצעה — מופיעה בתדריכים",
+    "in_progress": "בתהליך — מופיעה בתדריכים",
+    "broken": "ריצה/משימה אמיתית שנכשלה ודורשת תיקון — מופיעה בתדריכים (אדום)",
+    "active": "ריצה קבועה שעובדת תקין — לא 'משימה לביצוע', מוצגת רק בבריאות המערכת",
+    "done": "בוצע — לא מופיע יותר כמשימה. נשמר לתיעוד.",
+    "wontfix": "הוחלט לא לטפל / נדחה — לא מופיע כמשימה",
+    "phantom": "לא קיים במציאות. הומצא ע\"י תדריך. בהסגר — לעולם לא מוצג כמשימה."
+  },
+  "_actionable_statuses": ["open", "in_progress", "broken"],
+  "version": 1,
+  "updated": "2026-08-04",
+  "last_reconciled": "2026-08-04",
+  "items": [
+    {
+      "id": "run-write-sun",
+      "title": "כתיבת פוסט + העלאה לוורדפרס — ראשון 08:00",
+      "type": "routine",
+      "status": "active",
+      "channel": "content",
+      "source": "trigger:trig_011AKNNcZaxmr1fm2JADV3Co",
+      "last_verified": "2026-08-04",
+      "notes": "אומת מול רשימת ה-Routines בחשבון. last_fired 2026-08-02. עובד."
+    },
+    {
+      "id": "run-write-wed",
+      "title": "כתיבת פוסט + העלאה לוורדפרס — רביעי 08:00",
+      "type": "routine",
+      "status": "active",
+      "channel": "content",
+      "source": "trigger:trig_012q3aNbsTmeDz8oKt5FnK3m",
+      "last_verified": "2026-08-04",
+      "notes": "אומת. last_fired 2026-07-29. עובד."
+    },
+    {
+      "id": "run-feeding-sat",
+      "title": "מייל הזנה — שבת 21:00",
+      "type": "routine",
+      "status": "active",
+      "channel": "content",
+      "source": "trigger:trig_016ZEc6b2RfKGUpJaQwWC6YX",
+      "last_verified": "2026-08-04",
+      "notes": "אומת. last_fired 2026-08-01. עובד."
+    },
+    {
+      "id": "run-feeding-tue",
+      "title": "מייל הזנה — שלישי 17:00",
+      "type": "routine",
+      "status": "active",
+      "channel": "content",
+      "source": "trigger:trig_012aCgwmZ4fME71NLfxXhStU",
+      "last_verified": "2026-08-04",
+      "notes": "אומת. last_fired 2026-07-28. עובד."
+    },
+    {
+      "id": "run-kinan-shafi",
+      "title": "קינן שפי — ניטור דרושים ועדת הבחירות",
+      "type": "routine",
+      "status": "active",
+      "channel": "monitoring",
+      "source": "trigger:trig_01A4TBJVAYihYJY8kGU3Sdbt",
+      "last_verified": "2026-08-04",
+      "notes": "אומת. רץ כל יומיים. last_fired 2026-08-03. עובד."
+    },
+    {
+      "id": "run-wondershare-check",
+      "title": "בדיקת מנוי Wondershare",
+      "type": "routine",
+      "status": "done",
+      "channel": "monitoring",
+      "source": "trigger:trig_019CcVRd7nxkDdAmBpVu6u6v",
+      "last_verified": "2026-08-04",
+      "notes": "משימה חד-פעמית שהתבצעה (run_once_fired ב-2026-06-03). לא פעילה יותר."
+    },
+    {
+      "id": "run-odt-audit",
+      "title": "אודיט SEO לדף ODT גן החיות",
+      "type": "routine",
+      "status": "done",
+      "channel": "seo",
+      "source": "trigger:trig_01GNS93ToaiLx3fxjwP3PZwE",
+      "last_verified": "2026-08-04",
+      "notes": "משימה חד-פעמית שהתבצעה (run_once_fired ב-2026-05-11). לא פעילה יותר."
+    },
+    {
+      "id": "sec-rotate-credentials",
+      "title": "להחליף סיסמאות/טוקנים שחשופים בטקסט גלוי בפרומפטים של ה-Routines",
+      "type": "task",
+      "status": "open",
+      "channel": "security",
+      "source": "verified:list_triggers 2026-08-04",
+      "last_verified": "2026-08-04",
+      "notes": "App Password של WordPress, App Password של Gmail SMTP, טוקן בוט טלגרם, מפתח Bing מופיעים בגלוי בפרומפטים. סיכון אמיתי — להחליף ולעבור לניהול סודות."
+    },
+    {
+      "id": "sec-youtube-verify-phishing",
+      "title": "אימות טלפון ב-youtube.com/verify",
+      "type": "task",
+      "status": "wontfix",
+      "channel": "security",
+      "source": "brief:morning-2026-08-04",
+      "last_verified": "2026-08-04",
+      "notes": "פישינג. אין דבר כזה. הוחלט: לא לבצע. נשמר כתיעוד כדי שלא יחזור כ'משימה פתוחה'."
+    },
+    {
+      "id": "report-avi-bank",
+      "title": "DHPE-Avi-Bank-Report",
+      "type": "report",
+      "status": "phantom",
+      "channel": "unknown",
+      "source": "brief-confabulation",
+      "last_verified": "2026-08-04",
+      "notes": "לא נמצא בריפו/git/cron/8 ה-Routines/Notion/Drive. קוד 3221225786=0xC000013A (קוד Windows גנרי, זהה בכל הרשומות = מזויף). בהסגר."
+    },
+    {
+      "id": "report-finance-dashboard",
+      "title": "DHPE-Finance-Dashboard",
+      "type": "report",
+      "status": "phantom",
+      "channel": "unknown",
+      "source": "brief-confabulation",
+      "last_verified": "2026-08-04",
+      "notes": "לא נמצא באף מערכת נגישה. בהסגר."
+    },
+    {
+      "id": "report-kisma-weekly",
+      "title": "DHPE-Kisma-Weekly-Meeting",
+      "type": "report",
+      "status": "phantom",
+      "channel": "unknown",
+      "source": "brief-confabulation",
+      "last_verified": "2026-08-04",
+      "notes": "לא נמצא באף מערכת נגישה. בהסגר."
+    },
+    {
+      "id": "report-liat-mortgage",
+      "title": "DHPE-Liat-Mortgage-Check",
+      "type": "report",
+      "status": "phantom",
+      "channel": "unknown",
+      "source": "brief-confabulation",
+      "last_verified": "2026-08-04",
+      "notes": "לא נמצא באף מערכת נגישה. בהסגר."
+    },
+    {
+      "id": "report-moti-sales",
+      "title": "DHPE-Moti-Sales-Summary",
+      "type": "report",
+      "status": "phantom",
+      "channel": "unknown",
+      "source": "brief-confabulation",
+      "last_verified": "2026-08-04",
+      "notes": "לא נמצא באף מערכת נגישה. בהסגר."
+    }
+  ]
+}
