@@ -1,4 +1,28 @@
 {
   "_comment": "טריגרים מותנים חתומים. כותבת: מרים (binance-risk-manager) בלבד, דרך sign_trigger.py. קוראים: market_watcher.py ואיתן. status: active | consumed | expired | invalidated.",
-  "triggers": []
+  "triggers": [
+    {
+      "trigger_id": "T-2026-08-16-01",
+      "symbol": "BTCUSDT",
+      "condition": {
+        "op": "<=",
+        "price": 60200
+      },
+      "order": {
+        "type": "LIMIT",
+        "side": "BUY",
+        "notional_usdt": 50,
+        "price": 60200,
+        "stop": 58900,
+        "take_profit": 63800
+      },
+      "portfolio": "satellite",
+      "proposal_ref": "trade-proposals.md 2026-08-16",
+      "created_at": "2026-08-16T07:40:00Z",
+      "expires_at": "2026-08-17T07:35:00Z",
+      "approved_by": "miriam",
+      "sig": "99cd8422f106d32a8a41310993bbccb3498ef2948facdfc5291a1b07e989bad5",
+      "status": "active"
+    }
+  ]
 }
