@@ -37,7 +37,24 @@
 
 ## הערת סביבה
 
-ה-sandbox של claude.ai חוסם egress לרוב היעדים (נבדק 2026-08-16: api.binance.com,
-testnet.binance.vision ו-data-api.binance.vision — כולם חסומים, 403 מה-proxy).
-לכן: שולחן המסחר רץ כאן במצב נייר/המלצות; `market_watcher.py` חייב מארח חיצוני
-קבוע; נתוני שוק בסביבה זו — דרך חיפוש רשת עם ציון מקור.
+יש שתי סביבות ריצה, והן מתנהגות הפוך זו מזו. **כל סוכן מאמת בעצמו לפני שהוא מניח:**
+`py scripts/binance/check_connectivity.py`.
+
+- **ה-sandbox של claude.ai — egress חסום** (נבדק 2026-08-16: api.binance.com,
+  testnet.binance.vision ו-data-api.binance.vision, כולם 403 מה-proxy). נתוני שוק
+  שם — דרך חיפוש רשת עם ציון מקור, ובפקודת נייר חובה `--paper-price` מפורש.
+- **המחשב של דניאל — egress פתוח** (נבדק 2026-08-16 18:41 UTC: שלושת ה-hosts
+  החזירו 200, כולל testnet). נתוני שוק שם — מהסקריפטים בלבד, לא מחיפוש רשת.
+  זו הסביבה שמארחת את `market_watcher.py`.
+
+הפרדה קבועה: `market_watcher.py` חייב מארח עם egress פתוח ורציפות; קידום ל-Phase 1
+ומעלה מותנה בכך שהריצה יושבת על מארח כזה.
+
+## פלט קונסולה
+
+כל סקריפטי `scripts/binance/` מדפיסים עברית. קונסולת Windows היא cp1252 כברירת
+מחדל, ולכן הדפסה עברית מפילה סקריפט ב-`UnicodeEncodeError` **אחרי** שהפעולה
+הצליחה — קוד יציאה 1 על הצלחה (אירע ב-`sign_trigger.py` וב-`kill_check.py`,
+16.8). התיקון יושב ב-`binance_client.py` שכל הסקריפטים מייבאים. סקריפט חדש
+שלא מייבא אותו — חייב את אותו `reconfigure` בעצמו. אל תפתרו את זה עם
+`PYTHONIOENCODING` בשורת ההרצה: זה עובד פעם אחת ונשכח בפעם הבאה.

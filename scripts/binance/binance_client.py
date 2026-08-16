@@ -13,6 +13,16 @@ binance_client.py — לקוח Binance REST מינימלי, stdlib בלבד.
 
 import hashlib
 import hmac
+import sys as _sys
+
+# קונסולת Windows היא cp1252 כברירת מחדל, וכל הדפסה בעברית מפילה את הסקריפט
+# ב-UnicodeEncodeError אחרי שהפעולה עצמה כבר הצליחה (קוד יציאה 1 על הצלחה).
+# כל סקריפטי ה-CLI כאן מייבאים את המודול הזה, ולכן התיקון יושב במקום אחד.
+for _stream in (_sys.stdout, _sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
 import json
 import os
 import ssl
