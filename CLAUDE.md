@@ -29,6 +29,9 @@
   `BINANCE_TESTNET_API_KEY/SECRET`). בצד ביננס: spot trade בלבד,
   **משיכות (withdrawals) כבויות לתמיד**.
 - **עקיבות:** כל פקודה נושאת proposal_id או trigger_id. אין פקודות יתומות.
+- **הרצה בסאב-איג'נטים:** בצנרת מלאה כל סוכן רץ כסאב-איג'נט נפרד (Agent tool)
+  עם ה-SKILL.md שלו; הסשן הראשי מתאם, מפקח ומבצע רק git. סוכן לא נוגע בקובץ
+  שאינו בחוזה שלו.
 - לפני כל push: `git grep -inE "(api[_-]?key|secret|password)\s*[:=]" -- ':!CLAUDE.md' ':!*.md.tmpl'`
   ובדיקה ידנית של כל ממצא.
 
