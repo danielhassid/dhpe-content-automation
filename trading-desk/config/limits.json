@@ -1,6 +1,8 @@
 {
   "_comment": "מגבלות קשיחות. רק דניאל עורך קובץ זה. מרים (binance-risk-manager) מציעה שינויים בלבד. נאכף פעמיים: בפסק הדין של מרים וגם בקוד (place_order.py / market_watcher.py) לפני כל פקודה.",
   "allowed_symbols": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT"],
+  "min_daily_quote_volume_usdt": 500000,
+  "_min_daily_quote_volume_comment": "רצפת נזילות לסריקת לירון (binance-market-scanner). מתחת לזה השוק דק מדי ליציאה. סינון לדוח בלבד — אינו מרחיב את allowed_symbols.",
   "_mandate": "מטרת השולחן היא הגדלת הנפח הדולרי (USDT) של התיק. מדד ההצלחה הוא שווי התיק בדולרים, לא כמות היחידות של נכס כלשהו. הוראת דניאל, 16.8.2026.",
   "cash_invested_split": {"cash_pct": 50, "invested_pct": 50},
   "_cash_invested_split_comment": "הוראת דניאל 16.8.2026: מחצית התיק נשארת USDT נזיל, מחצית מושקעת. 50% המזומן הם רצפה — סכום כל הפוזיציות הפתוחות לא עובר 50% משווי התיק. חריגה = חסימת כל קנייה חדשה עד מכירה.",
