@@ -1,0 +1,10 @@
+# סודות — לעולם לא בריפו
+.env
+.env.*
+*.key
+*.pem
+secrets/
+
+# Python
+__pycache__/
+*.pyc

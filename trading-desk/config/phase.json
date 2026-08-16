@@ -1,0 +1,8 @@
+{
+  "phase": 0,
+  "env": "paper",
+  "base_url": null,
+  "approved_by": "daniel",
+  "date": "2026-08-16",
+  "notes": "Phase 0 = מצב נייר/המלצות. איתן מדמה מילוי ורושם ל-orders-log.jsonl בלבד. קידום ל-Phase 1 (testnet) או 2 (live) — רק בעריכה ידנית של דניאל, אחרי הצ'קליסט ב-PROGRESS.md."
+}
