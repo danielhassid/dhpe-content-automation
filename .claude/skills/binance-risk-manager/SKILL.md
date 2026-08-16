@@ -47,6 +47,15 @@ description: |
 2. red_flag: true? → וטו לכל Satellite חדש (סגירות/הגנות מותרות).
 3. סימבול ב-allowed_symbols? סוג פקודה ב-order_types_allowed?
 4. notional ≤ max_order_notional_usdt? הפוזיציה המתקבלת ≤ max_position_pct_of_portfolio?
+   **התקרה נמדדת לפי נכס** (`_max_position_scope: "asset"`): Core ו-Satellite באותו
+   סימבול נספרים יחד, לא כל דלי בנפרד.
+4א. **רצפת המזומן (הוראת דניאל 16.8.2026).** סכום כל הפוזיציות הפתוחות אחרי ההצעה
+   ≤ `cash_invested_split.invested_pct` (50%) משווי התיק. מחצית התיק נשארת USDT
+   נזיל תמיד. חריגה = VETO, גם אם כל שאר השערים עברו. `core_satellite_split`
+   (80/20) חל על החצי המושקע בלבד — על תיק 1,000: מושקע עד 500, מתוכו Core 400
+   ו-Satellite 100.
+   **המנדט:** מדד ההצלחה הוא הנפח הדולרי (USDT) של התיק, לא כמות היחידות של נכס.
+   פוזיציה שמגדילה יחידות אך שוחקת דולרים אינה עומדת במנדט.
 5. פוזיציות Satellite פתוחות < max_open_satellite_positions?
 6. יש stop בכל קנייה (require_stop_loss)? המרחק לסטופ סביר (לא מעבר ל-daily_loss_limit_pct מהתיק)?
 7. הפסד ממומש היום/השבוע בתוך daily/weekly_loss_limit_pct? הפסד אתמול → cooldown_after_loss_hours בתוקף?
