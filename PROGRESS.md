@@ -25,6 +25,37 @@
 - [ ] **צעד 13** — הרצה ידנית ראשונה של כתיבת פוסט — בדיקה שהטיוטה מלאה
 - [ ] **צעד 14** — הפעלת לוח הזמנים האוטומטי (רק אחרי שצעדים 12-13 עובדים)
 
+---
+
+# שולחן המסחר ביננס — סטטוס התקדמות
+
+## שלבים שבוצעו (2026-08-16)
+
+- [x] **צעד 1** — נבנה עץ `trading-desk/` מלא: config (limits.json, phase.json ב-Phase 0), inbox, decisions, state, rules
+- [x] **צעד 2** — נכתבו הסקריפטים ב-`scripts/binance/`: client, connectivity, prices, portfolio, place_order (כל שערי הבטיחות), market_watcher, sign_trigger, kill_check
+- [x] **צעד 3** — בדיקת קישוריות: api.binance.com / testnet / data-api — **כולם חסומים מה-sandbox (403)**. המערכת נשארת ב-Phase 0
+- [x] **צעד 4** — נבדקו שערי הבטיחות בפועל: פקודת נייר תקינה ✓, חסימת notional ✓, חסימת קנייה בלי סטופ ✓, חסימת סימבול זר ✓, KILL-SWITCH ✓
+- [x] **צעד 5** — נבדק ה-watcher בפועל: טריגר חתום נורה פעם אחת ✓, אין ביצוע כפול ✓, טריגר שנערך אחרי חתימה נפסל ✓, TTL פג ✓
+- [x] **צעד 6** — נבנו 7 הסקילים: binance-cio (אלון), binance-macro-analyst (תמר), binance-technical-analyst (יואב), binance-news-sentiment (נועה), binance-risk-manager (מרים), binance-trade-executor (איתן), binance-performance-retro (גדי)
+- [x] **צעד 7** — נכתבו CLAUDE.md, .gitignore, ועודכן README
+
+## שלבים שנותרו
+
+- [ ] **צעד 8** — הרצה ידנית מלאה של צנרת הבוקר ב-Phase 0 (תמר → נועה → יואב → אלון → מרים → איתן) ובדיקה שכל סוכן כותב רק את קובץ החוזה שלו
+- [ ] **צעד 9** — רטרו ראשון של גדי אחרי שבוע נייר
+- [ ] **צעד 10** — הגדרת Routine "סריקת בוקר" (א'–ה' 07:30) + "רטרו שבועי" (ו' 09:00) — רק אחרי שצעד 8 עובר
+- [ ] **צעד 11** — Phase 1: יצירת מפתחות testnet (testnet.binance.vision) כ-env secrets, מארח חיצוני ל-market_watcher, עדכון phase.json ידנית
+- [ ] **צעד 12** — פקודת LIMIT אחת ב-testnet שנראית ב-get_portfolio.py
+- [ ] **צעד 13** — שבועיים / 10 עסקאות נקיות ב-testnet בלי הפרת חוזה
+- [ ] **צעד 14** — Phase 2: מפתחות אמיתיים (spot בלבד, בלי משיכות, IP whitelist), תקרות זעירות ב-limits.json, עדכון phase.json ידנית
+
+## הערות חשובות — שולחן המסחר
+
+1. **עומס Routines:** מסחר 6/שבוע + תוכן 4/שבוע; היום העמוס ביותר = 2 ריצות — בתוך מגבלת 5/יום. אפשר להתחיל א'/ג'/ה' בלבד
+2. **egress:** כל ה-hosts של ביננס חסומים מה-sandbox. ה-watcher חייב VPS / Raspberry Pi / מחשב דולק
+3. **מפתחות:** env secrets בלבד. לא לחזור על תקרית הסיסמה ב-RUN-LOG
+4. **קבצים שרק דניאל עורך:** limits.json, phase.json. מחיקת KILL-SWITCH — רק דניאל
+
 ## הערות חשובות להמשך
 
 1. **WordPress connector** — צריך לבדוק אם dhpe.co.il הוא WordPress.com או self-hosted, כי זה משפיע על הגדרת ה-connector

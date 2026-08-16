@@ -1,0 +1,4 @@
+{
+  "_comment": "טריגרים מותנים חתומים. כותבת: מרים (binance-risk-manager) בלבד, דרך sign_trigger.py. קוראים: market_watcher.py ואיתן. status: active | consumed | expired | invalidated.",
+  "triggers": []
+}
