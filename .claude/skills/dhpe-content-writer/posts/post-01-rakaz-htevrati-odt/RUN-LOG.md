@@ -1,52 +1,90 @@
 # Run log — Post 01
 
-**Date:** 2026-04-29 (יום ראשון)
-**Mode:** write-and-publish
-**Operator:** Claude Code (Opus 4.7) running in sandboxed harness
+**Post:** מה הרכז החברתי באמת צריך מפעילות ODT (חודש 1 / שבוע 1 / ראשון, נישה 1 — ליבה)
+**Focus keyword:** רכז חברתי ODT
+**Slug:** rakaz-htevrati-odt-tzrahim
 
-## Outcomes
+---
 
-| שלב | סטטוס |
-|---|---|
-| 1. בחירת פוסט הבא מהתוכנית | ✅ נבחר: "מה הרכז החברתי באמת צריך מפעילות ODT" (חודש 1 / שבוע 1 / ראשון) |
-| 2. אימות שלא פורסם בוורדפרס | ⚠️ חסום — ה-host www.dhpe.co.il לא ב-egress allowlist של הסנדבוקס |
-| 3. חיפוש תשובת דניאל בג'ימייל | ✅ אין תשובה — רק מייל ההזנה היוצא מה-26.4 |
-| 4. WebSearch + ניתוח תחרות | ✅ זוהה פער תוכן: אף תוצאה מובילה לא מדברת בשפת הרכז החברתי |
-| 5. כתיבת פוסט 1500-2000 מילים | ✅ 1533 מילים, עברית, ללא סיפור אישי |
-| 6. חבילת SEO | ✅ Meta/OG/Twitter/Slug/FAQ schema |
-| 7. העלאה כטיוטה לוורדפרס | ❌ חסום (HTTP 403 host_not_allowed) |
-| 8. שליחת מייל התראה ב-SMTP | ❌ חסום (TCP timeout ל-smtp.gmail.com:465 ו-:587) |
-| 9. עדכון תוכנית פוסטים | ⚠️ נשאר pending — לא בוצעה העלאה אמיתית |
+## Run history
 
-## Network blockers (מילולית)
+| # | Date | Type | Outcome |
+|---|---|---|---|
+| 1 | 2026-04-29 | write-and-publish | ✅ תוכן נכתב (1533 מילים), ❌ WP upload חסום (403 host_not_allowed), ❌ SMTP חסום |
+| 2 | 2026-06-09 | feeding-email retry | ❌ SMTP חסום |
+| 3 | 2026-06-13 | feeding-email retry | ❌ SMTP חסום |
+| 4 | 2026-06-20 | feeding-email retry | ❌ SMTP חסום |
+| 5 | 2026-06-27 | feeding-email retry | ❌ SMTP חסום |
+| 6 | 2026-06-30 | feeding-email retry | ❌ SMTP חסום |
+| 7 | 2026-08-01 | feeding-email retry | ❌ SMTP חסום |
+| 8 | 2026-09-08 | feeding-email | ✅ נשלח דרך Gmail API fallback (msg id 1a08162eeb2dfa90); ❌ SMTP עדיין חסום |
+| 9 | 2026-09-13 | **write-and-publish (זו הריצה)** | ראה למטה |
+
+---
+
+## Run 9 — 2026-09-13 04:59-05:10 UTC (write-and-publish)
+
+**Model:** Claude Opus 4.7 (claude-opus-4-7) בסנדבוקס של Claude Code on the web
+
+### שלבים
+
+| שלב | סטטוס | הערות |
+|---|---|---|
+| 1. בחירת פוסט הבא | ✅ נבחר: פוסט 01 (Sunday week 1) — עדיין `pending` בטבלה |
+| 2. אימות ב-WP שהפוסט לא פורסם | ❌ **חסום** — `CONNECT tunnel failed, response 403` על `www.dhpe.co.il:443` דרך ה-agent proxy |
+| 3. חיפוש תשובת דניאל בג'ימייל | ✅ אין תשובה — הפידינג של 2026-09-08 (thread 1a08162eeb2dfa90) הגיע ל-Inbox של דניאל אך לא נענה. כתיבה בלי סיפור אישי, בהתאם ל-fallback המוגדר בסקיל. |
+| 4. WebSearch למילת המפתח | ✅ שתי סריקות: `"רכז חברתי" "ODT" בית ספר` ו-`רכז חברתי בית ספר תפקיד ODT`. פער תוכן זהה לזה שזוהה ב-Run 1 — התוצאות המובילות (ODTeam, יוניטי, במרכז) מדברות בשפת גיבוש עובדים, לא בשפת רכז חברתי. הפוסט של DHPE ("איך לבחור סדנת ODT") מדורג אבל לא נוגע בשלוש שכבות הצורך של הרכז. |
+| 5. כתיבת פוסט 1500-2000 מילים | ✅ **תוכן מ-Run 1 זמין ותקף** — 1533 מילים, 6 H2, 4 H3, 5 FAQ עם JSON-LD, מחירון עם הבהרת 15 תלמידים, 3 קישורים פנימיים. אין סטייה מ-knowledge/*. |
+| 6. חבילת SEO | ✅ `seo-package.md`, `wp-payload.json` (עם כל שדות Yoast) מוכנים מ-Run 1 |
+| 7. העלאה כטיוטה ל-WP | ❌ **חסום** — אותו 403 host_not_allowed. אין MCP חלופי ל-WordPress דרך ה-proxy. |
+| 8. שליחת מייל התראה ב-SMTP | ❌ **חסום** — IPv6: `OSError [Errno 97] Address family not supported by protocol`; IPv4 forced, port 465: `TimeoutError`; port 587: `TimeoutError`. Fallback ל-Gmail HTTPS API בוצע (ראה למטה). |
+| 9. עדכון תוכנית פוסטים | ⚠️ **נשאר `pending`** — לא בוצעה העלאת draft אמיתית ל-WP; שינוי הסטטוס עכשיו יגרום לסקיל לדלג לפוסט 02 ב-16.9 ולהותיר את פוסט 01 תקוע לנצח. |
+
+### פעולות בפועל בריצה הזו
+
+1. אימות שהחסימות ב-egress עדיין בתוקף (לא רגרסיה זמנית).
+2. עדכון ה-RUN-LOG הזה.
+3. שליחת מייל אחד לדניאל דרך `mcp__Gmail__send_message` (אותו fallback שהוכיח עצמו ב-Run 8) — לא כפילות של מייל טיוטה, אלא **דיווח חסימה מרוכז** שמסביר שהריצה ה-12 ברצף נכשלה מאותה סיבה, עם קישור לתוכן המוכן ב-git ומה נדרש כדי לסגור את הלולאה.
+4. Push notification לטלפון של דניאל עם שורת הפעולה.
+5. Commit + push.
+
+### מה חסום, מדוד ומדויק
 
 ```
-$ curl -s -u '...' -X POST 'https://www.dhpe.co.il/wp-json/wp/v2/posts' -d @wp-payload.json
-HTTP=403
-< x-deny-reason: host_not_allowed
-Host not in allowlist
+$ curl -sS "$HTTPS_PROXY/__agentproxy/status"
+"recentRelayFailures":[{
+  "kind":"connect_rejected",
+  "detail":"gateway answered 403 to CONNECT (policy denial or upstream failure)",
+  "host":"www.dhpe.co.il:443"
+}]
+
+$ python3 smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=15) [IPv4 forced]
+IPv4 SMTP FAIL: TimeoutError timed out
+
+$ python3 smtplib.SMTP('smtp.gmail.com', 587, timeout=15)
+IPv4 SMTP:587 FAIL: TimeoutError timed out
 ```
 
-```
-$ python3 smtplib.SMTP_SSL('smtp.gmail.com', 465)
-SMTP_FAIL: OSError [Errno 97] Address family not supported by protocol
-TCP probe (IPv4): smtp.gmail.com:465 timed out
-TCP probe (IPv4): smtp.gmail.com:587 timed out
-```
+### מה דרוש כדי לסגור את פוסט 01
 
-## מה דרוש כדי לסיים את הריצה הזו
+**אופציה א — הפעולה של דניאל, פעם אחת (~5 דקות):**
 
-אופציה א — להריץ את הסקיל מסביבה ללא חסימת egress:
-1. `cd /path/to/dhpe-content-automation` (עם הקבצים מהקומיט הזה)
-2. הרצת הפקודה המוכנה:
-   ```bash
-   curl -u 'dh052597@gmail.com:6fZA HCsa nTIw rFYh JQnL PU42' \
-     -X POST 'https://www.dhpe.co.il/wp-json/wp/v2/posts' \
-     -H 'Content-Type: application/json; charset=utf-8' \
-     --data-binary @.claude/skills/dhpe-content-writer/posts/post-01-rakaz-htevrati-odt/wp-payload.json
-   ```
-   קח את ה-`id` שחוזר.
-3. החלף `__POST_ID__` ב-`notification-email.md` ב-ID האמיתי, והרץ את סקריפט ה-SMTP מהסעיף 8 בהוראות המקוריות.
-4. עדכן את `content-plan/24-posts-plan.md` (שורת "חודש 1 שבוע 1 ראשון") מ-`pending` ל-`draft-ready`.
+1. פתח את `wp-payload.json` בתיקייה הזו.
+2. העתק את שדה `content` ל-WP admin (`https://www.dhpe.co.il/wp-admin/post-new.php`) — Block editor → HTML block, או Classic editor Text tab.
+3. העתק את הכותרת, ה-slug, ה-excerpt, ואת כל שדות Yoast מהמפתחות שמופיעים ב-`meta`.
+4. שמור כ-Draft (לא לפרסם).
+5. שלח לי (או תעדכן את `24-posts-plan.md`) שהסטטוס עבר ל-`draft-ready`, ואמשיך משם.
 
-אופציה ב — להוסיף את `www.dhpe.co.il` ו-`smtp.gmail.com` ל-allowlist של הסנדבוקס שמפעיל את Claude Code, ולהריץ את הסקיל שוב.
+**אופציה ב — תיקון החסימה, פעם אחת ולתמיד:**
+
+1. Claude Code on the web → Settings → Environments → העריכה של הסביבה שמריצה את הסקיל הזה → Network policy → הוסף ל-allowlist:
+   - `www.dhpe.co.il:443`
+2. אחרי זה כל ריצה עתידית תעלה את הטיוטה אוטומטית ל-WP. SMTP יישאר חסום, אבל fallback ל-Gmail API כבר עובד.
+3. אופציונלי: הוסף גם `smtp.gmail.com:465` ו-`smtp.gmail.com:587` כדי לחזור למסלול ה-SMTP הרשמי; לא חובה — Gmail API עובד.
+
+**אופציה ג — לשנות את ה-iron rule של הסקיל:**
+
+1. אשר לסקיל לעדכן את `24-posts-plan.md` ל-`draft-ready` כשהתוכן והחבילה קיימים בגיט, גם ללא ה-upload ל-WP. אז הסקיל יתקדם לפוסט 02 ואתה תעלה ידנית מהקבצים.
+2. הסיכון: אתה תצטרך זיכרון פעיל לגבי איזה פוסט מחכה להעלאה ידנית.
+
+---
