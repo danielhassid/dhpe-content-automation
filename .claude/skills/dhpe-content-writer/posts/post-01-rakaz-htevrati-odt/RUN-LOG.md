@@ -18,7 +18,8 @@
 | 6 | 2026-06-30 | feeding-email retry | ❌ SMTP חסום |
 | 7 | 2026-08-01 | feeding-email retry | ❌ SMTP חסום |
 | 8 | 2026-09-08 | feeding-email | ✅ נשלח דרך Gmail API fallback (msg id 1a08162eeb2dfa90); ❌ SMTP עדיין חסום |
-| 9 | 2026-09-13 | **write-and-publish (זו הריצה)** | ראה למטה |
+| 9 | 2026-09-13 | write-and-publish | ✅ תוכן קיים ותקף; ❌ WP חסום (403 CONNECT); ❌ SMTP חסום (IPv6 unsupported, IPv4 timeout); ✅ Gmail MCP fallback — נשלח מייל דיווח מרוכז אחד (thread 1a0992ce319db18c). דניאל לא השיב עד 16.9. |
+| 10 | 2026-09-16 | **write-and-publish (זו הריצה)** | ראה למטה |
 
 ---
 
@@ -86,5 +87,38 @@ IPv4 SMTP:587 FAIL: TimeoutError timed out
 
 1. אשר לסקיל לעדכן את `24-posts-plan.md` ל-`draft-ready` כשהתוכן והחבילה קיימים בגיט, גם ללא ה-upload ל-WP. אז הסקיל יתקדם לפוסט 02 ואתה תעלה ידנית מהקבצים.
 2. הסיכון: אתה תצטרך זיכרון פעיל לגבי איזה פוסט מחכה להעלאה ידנית.
+
+---
+
+## Run 10 — 2026-09-16 (write-and-publish, שלישי-הבוקר של תוכנית שבוע 3)
+
+**Model:** Claude Opus 4.7 (claude-opus-4-7) בסנדבוקס של Claude Code on the web
+**Rationale:** ריצה 12 של הלולאה. אותו state בדיוק, אימות ידני:
+
+### אימות חסימות (2026-09-16)
+
+```
+$ curl -sS -u ... 'https://www.dhpe.co.il/wp-json/wp/v2/posts?search=...'
+→ curl: (56) CONNECT tunnel failed, response 403
+  www.dhpe.co.il:443 — connect_rejected (organization network policy)
+
+$ python3 smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=15)
+→ OSError [Errno 97] Address family not supported by protocol (IPv6)
+
+$ python3 socket → IPv4 connect smtp.gmail.com:465 / :587
+→ TimeoutError timed out (שני היעדים)
+```
+
+### מה נעשה בפועל בריצה הזו
+
+1. אומתה תיבת דניאל דרך Gmail MCP — אין תשובה מדניאל לפידינג של 08-09 (thread `1a08162eeb2dfa90`) ולא לדיווח החסימה של 13-09 (thread `1a0992ce319db18c`).
+2. אומתה תוכן ה-`post-content.html` וה-`wp-payload.json` — זהים למה שהיה מוכן ב-Run 1/Run 9, תואם לכל דרישות ה-`knowledge/*` והתבניות. אין צורך לכתוב מחדש.
+3. **לא נשלח מייל התראה חדש.** מייל דיווח החסימה של 13-09 הוא בן 3 ימים; שליחת מייל 13 באותו שרשור-כאב הופכת ל-spam ומחלישה את הסיגנל. סטנד-דאון עד שדניאל משיב או מסיר את החסימה.
+4. עדכון RUN-LOG (הקובץ הזה) בלבד, ו-push notification יחיד לטלפון.
+5. `24-posts-plan.md` נשאר עם סטטוס `pending` לפוסט 01, כפי שנקבע ב-Run 9. אין קידום לפוסט 02 עד שפוסט 01 עולה בפועל ל-WP.
+
+### מה נדרש כדי לסגור את פוסט 01
+
+אותן שלוש אופציות של Run 9 (א/ב/ג) — ראו לעיל. שום דבר לא השתנה מבחינת הפעולה שדניאל צריך לבצע.
 
 ---
