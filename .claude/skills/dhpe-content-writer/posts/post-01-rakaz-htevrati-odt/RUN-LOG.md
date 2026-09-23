@@ -20,7 +20,8 @@
 | 8 | 2026-09-08 | feeding-email | ✅ נשלח דרך Gmail API fallback (msg id 1a08162eeb2dfa90); ❌ SMTP עדיין חסום |
 | 9 | 2026-09-13 | write-and-publish | ✅ תוכן קיים ותקף; ❌ WP חסום (403 CONNECT); ❌ SMTP חסום (IPv6 unsupported, IPv4 timeout); ✅ Gmail MCP fallback — נשלח מייל דיווח מרוכז אחד (thread 1a0992ce319db18c). דניאל לא השיב עד 16.9. |
 | 10 | 2026-09-16 | write-and-publish | ✅ תוכן/חבילה קיימים; ❌ WP חסום; ❌ SMTP חסום; ⏸️ סטנד-דאון מייל (3 ימים בלבד מ-Run 9) |
-| 11 | 2026-09-20 | **write-and-publish (זו הריצה)** | ראה למטה |
+| 11 | 2026-09-20 | write-and-publish | ✅ תוכן/חבילה קיימים; ❌ WP חסום; ❌ SMTP חסום; ✅ תזכורת יחידה ב-thread `1a0992ce319db18c` |
+| 12 | 2026-09-23 | **write-and-publish (זו הריצה)** | ראה למטה |
 
 ---
 
@@ -154,5 +155,41 @@ $ python3 socket → connect smtp.gmail.com:465 (IPv4 forced)
 ### מה נדרש כדי לסגור את פוסט 01
 
 אותן שלוש אופציות של Run 9 (א/ב/ג). ההעדפה: אופציה ב' — הוספת `www.dhpe.co.il:443` לרשימת ה-egress של הסביבה. פעולה חד-פעמית של ~2 דקות שפותרת את הלולאה כולה.
+
+---
+
+## Run 12 — 2026-09-23 (write-and-publish, רביעי-הבוקר של תוכנית שבוע 4)
+
+**Model:** Claude Opus 4.7 (claude-opus-4-7) בסנדבוקס של Claude Code on the web
+**Rationale:** ריצה 14 של הלולאה. 3 ימים מאז תזכורת Run 11. מרווח זהה לזה שבין Run 9 ל-Run 10 → מדיניות סטנד-דאון על מייל (לא לפצל את השרשור עם מייל 15 באותו נושא בפער של 3 ימים).
+
+### אימות חסימות (2026-09-23)
+
+```
+$ curl -u ... 'https://www.dhpe.co.il/wp-json/wp/v2/posts?search=רכז%20חברתי&status=any&per_page=20'
+→ Bash [agent-proxy]: www.dhpe.co.il:443 — connect_rejected (organization policy denial)
+
+$ WebFetch https://www.dhpe.co.il/wp-json/wp/v2/posts?...
+→ {"error_type":"EGRESS_BLOCKED","domain":"www.dhpe.co.il",
+   "message":"Access to www.dhpe.co.il is blocked by the network egress proxy."}
+
+$ python3 socket.create_connection(('smtp.gmail.com', 465), timeout=10)
+→ OSError [Errno 97] Address family not supported by protocol
+```
+
+שלוש שכבות שונות (Bash curl, WebFetch, python socket) — כולן חוסמות. אין רגרסיה זמנית.
+
+### מה נעשה בפועל בריצה הזו
+
+1. אומתה תיבת דניאל דרך Gmail MCP (`from:dh052597@gmail.com newer_than:7d`) — אין תשובה חדשה ב-thread `1a0992ce319db18c`. התכתובות היחידות של דניאל ב-7 הימים האחרונים: נטע (חשבונית הצהרת הון), שני (מסע סוכות), נתנאל (גינגל עסקי), Unsubscribe אחד. שום התייחסות לחסימה.
+2. אומת שוב שהתוכן וחבילת ה-SEO ב-`post-content.html` (460 מילים ספירת wc, ~1533 מילים לפי ספירת מלל הפוסט המקורית ב-Run 1) וב-`wp-payload.json` תקפים ולא השתנו.
+3. **לא נשלח מייל חדש.** תזכורת Run 11 היא בת 3 ימים; אותו מרווח שבו ב-Run 10 בוצע סטנד-דאון. שליחה נוספת עכשיו הופכת את השרשור לרעש ומחלישה את הסיגנל בפעם הבאה שכן צריך לדבר.
+4. Push notification יחיד לטלפון של דניאל (זו ההודעה של הריצה — הרוטינה קיימת בשביל הרגע שדניאל לא מסתכל בסשן).
+5. `24-posts-plan.md` נשאר עם סטטוס `pending` לפוסט 01. אין קידום לפוסט 02.
+6. Commit + push של עדכון ה-RUN-LOG בלבד.
+
+### מה נדרש כדי לסגור את פוסט 01
+
+אותן שלוש אופציות של Run 9 (א/ב/ג). ההעדפה נשארת אופציה ב': הוספת `www.dhpe.co.il:443` (ואופציונלית `smtp.gmail.com:465`) לרשימת ה-egress של הסביבה שמריצה את הסקיל.
 
 ---
