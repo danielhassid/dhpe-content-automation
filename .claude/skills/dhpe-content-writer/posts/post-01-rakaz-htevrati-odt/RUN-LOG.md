@@ -21,7 +21,8 @@
 | 9 | 2026-09-13 | write-and-publish | ✅ תוכן קיים ותקף; ❌ WP חסום (403 CONNECT); ❌ SMTP חסום (IPv6 unsupported, IPv4 timeout); ✅ Gmail MCP fallback — נשלח מייל דיווח מרוכז אחד (thread 1a0992ce319db18c). דניאל לא השיב עד 16.9. |
 | 10 | 2026-09-16 | write-and-publish | ✅ תוכן/חבילה קיימים; ❌ WP חסום; ❌ SMTP חסום; ⏸️ סטנד-דאון מייל (3 ימים בלבד מ-Run 9) |
 | 11 | 2026-09-20 | write-and-publish | ✅ תוכן/חבילה קיימים; ❌ WP חסום; ❌ SMTP חסום; ✅ תזכורת יחידה ב-thread `1a0992ce319db18c` |
-| 12 | 2026-09-23 | **write-and-publish (זו הריצה)** | ראה למטה |
+| 12 | 2026-09-23 | write-and-publish | ✅ תוכן/חבילה קיימים; ❌ WP חסום; ❌ SMTP חסום (OSError Errno 97); ⏸️ סטנד-דאון מייל (3 ימים מתזכורת Run 11) |
+| 13 | 2026-10-04 | **write-and-publish (זו הריצה)** | ראה למטה |
 
 ---
 
@@ -191,5 +192,45 @@ $ python3 socket.create_connection(('smtp.gmail.com', 465), timeout=10)
 ### מה נדרש כדי לסגור את פוסט 01
 
 אותן שלוש אופציות של Run 9 (א/ב/ג). ההעדפה נשארת אופציה ב': הוספת `www.dhpe.co.il:443` (ואופציונלית `smtp.gmail.com:465`) לרשימת ה-egress של הסביבה שמריצה את הסקיל.
+
+---
+
+## Run 13 — 2026-10-04 (write-and-publish, ראשון-הבוקר של תוכנית שבוע 6)
+
+**Model:** Claude Opus 4.7 (claude-opus-4-7) בסנדבוקס של Claude Code on the web
+**Rationale:** ריצה 15 של הלולאה. 14 ימים מאז תזכורת Run 11 (20.9) ו-11 ימים מאז הסטנד-דאון של Run 12 (23.9). המייל של 20.9 התחייב מפורשות לא לשלוח עוד הודעה על אותה חסימה עד 1.10 — חרגנו ב-3 ימים, הגיע הזמן לתזכורת שנייה.
+
+### אימות חסימות (2026-10-04)
+
+```
+$ curl -v -u ... 'https://www.dhpe.co.il/wp-json/wp/v2/posts?per_page=1'
+→ HTTP/1.1 403 Forbidden (CONNECT tunnel failed)
+  recentRelayFailures: www.dhpe.co.il:443 — connect_rejected
+  (gateway answered 403 to CONNECT - policy denial or upstream failure)
+
+$ python3 socket.create_connection(('smtp.gmail.com', 465), timeout=10)
+→ OSError [Errno 97] Address family not supported by protocol
+
+$ python3 socket.create_connection(('smtp.gmail.com', 587), timeout=10)
+→ OSError [Errno 97] Address family not supported by protocol
+```
+
+שלוש שכבות שונות — WP, SMTP:465, SMTP:587 — כולן חסומות ברמת ה-egress של הסביבה. לא רגרסיה זמנית.
+
+### מה נעשה בפועל בריצה הזו
+
+1. אומת שהתוכן ב-`post-content.html` וה-payload ב-`wp-payload.json` עדיין קיימים ותקפים (~1533 מילים, Schema FAQ, 3 קישורים פנימיים, מחירון עם הבהרת 15 תלמידים). שום דבר ב-knowledge/pricing/target-audience לא השתנה.
+2. אומת בג'ימייל שאין תשובה חדשה מדניאל:
+   - thread `1a0992ce319db18c` (דיווח חסימה 13.9 + תזכורת 20.9): לא נענה.
+   - thread `1a0e14347f31caf2` (רוטינת כתיבה לא הצליחה לרוץ — 27.9): דניאל ביקש "תעלי את זה בבקשה לקיסמה". לא התקבל עדכון מאז.
+   - thread `1a102f5dcfb53421` (פידינג חדש של 3.10 לסיפור אישי לפוסט): לא נענה. לכן ממשיכים עם התוכן הקיים ללא סיפור אישי.
+3. **נשלח מייל תזכורת שני** — Reply ב-thread `1a0992ce319db18c` (שומרים את כל הדיווח בשרשור אחד). תוכן: 4-5 שורות שמצביעות על החסימה שעדיין בעינה, 15 ימים מאז התזכורת האחרונה, הפניה לאופציות המוכרות, והפניה לבקשת ההסלמה שדניאל שלח ב-27.9.
+4. Push notification יחיד לטלפון של דניאל.
+5. `24-posts-plan.md` נשאר עם סטטוס `pending` לפוסט 01. אין קידום לפוסט 02 עד שפוסט 01 נכנס ל-WP בפועל.
+6. Commit + push של עדכון ה-RUN-LOG והפניה למייל התזכורת.
+
+### מה נדרש כדי לסגור את פוסט 01
+
+אותן שלוש אופציות של Run 9 (א/ב/ג). ההעדפה נשארת אופציה ב' — allowlist ל-`www.dhpe.co.il:443` בסביבה שמריצה את הרוטינה. אם קיסמה סימנה שההחלטה בעיכוב — אופציה א' (העתקה ידנית חד-פעמית מ-`wp-payload.json`) סוגרת את פוסט 01 ומאפשרת לרוטינה להתקדם לפוסט 02 ב-7.10.
 
 ---
